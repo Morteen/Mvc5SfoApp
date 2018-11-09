@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Testside";
+}
+<h2 data-bind="text:title"></h2>
+<h3 data-bind="text:message"></h3>
+
+
+
+
+
+
+
+
+<div data-bind="visible:visVelkom">
+    <div data-bind="component:{
+    name:'Velkom-component',
+  
+}">
+    </div>
+</div>
+<!--params:{velkomTxt:'Hei login eller registrer deg :-)'  }-->
+
+
+
+
+<div data-bind="visible:visInputBox">
+    <div data-bind="component:{
+    name:'login-component',
+    params:{UserName:'Morten',Password:'1234' }
+}">
+    </div>
+</div>
+
+<div data-bind="visible:visRegForm">
+    <div data-bind="component:{
+    name:'regForm-component',
+ params:{Name:'',UserName:'',Password:'',email:'' }
+
+}"></div>
+</div>
+
+<div data-bind="visible:visComp">
+    <div data-bind="component:{
+    name:'alert-component',
+    params:{ Message:'Dette ble en suksess igjen',Klasse:'alert alert-success'}
+  
+}" ></div>
+</div>
+
+
+@section scripts{
+    
+    
+
+  
+}
