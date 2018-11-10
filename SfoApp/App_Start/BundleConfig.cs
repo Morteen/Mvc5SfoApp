@@ -24,7 +24,9 @@ namespace SfoApp
             //Mine scripts
             bundles.Add(new ScriptBundle("~/bundles/SfoScripts").Include(
                 "~/Scripts/SfoScripts/test.js",
-                "~/Scripts/SfoScripts/Components/LoginView.js"));
+                "~/Scripts/SfoScripts/Components/LoginView.js",
+                "~/Scripts/SfoScripts/Navigation.js"
+                ));
 
 
 
