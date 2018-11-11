@@ -7,5 +7,8 @@ namespace SfoApp.Models
 {
     public class Skole
     {
+
+        public int SkoleId { get; set; }
+        public string SkoleNavn { get; set; }
     }
 }

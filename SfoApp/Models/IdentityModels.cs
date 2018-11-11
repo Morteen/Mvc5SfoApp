@@ -20,6 +20,14 @@ namespace SfoApp.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        //Mine klasser
+        public DbSet<Skole> Skoler { get; set; }
+        public DbSet<Ansatt> Ansatte { get; set; }
+        public DbSet<Elev> Elever { get; set; }
+        public DbSet<SjekkInLogg> SjekkInLogg { get; set; }
+
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
