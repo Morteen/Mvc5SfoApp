@@ -237,6 +237,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\SfoScripts\Components\LoginView.js" />
+    <Content Include="Scripts\SfoScripts\Components\templatePage.html" />
     <Content Include="Scripts\SfoScripts\Navigation.js" />
     <Content Include="Scripts\SfoScripts\test.js" />
     <Content Include="Scripts\_references.js" />

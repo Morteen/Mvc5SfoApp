@@ -96,6 +96,15 @@ function RegFormComponentViewModel(params) {
 
 
 
+ function TestComponentViewModel(){
+   
+    TestTemplate: ko.observable()
+
+
+}
+
+
+
 
 function velkomTempl() {
     return '<div class="jumbotron" >' +
@@ -139,6 +148,7 @@ function alertTempl() {
 }
 
 
+
 ko.components.register('Velkom-component', {
     viewModel: VelkomComponentViewModel,
     template: velkomTempl()
@@ -156,6 +166,16 @@ ko.components.register('alert-component', {
     viewModel: alertComponentViewModel,
     template: alertTempl()
 })
+
+
+ko.components.register('test-component', {
+    viewModel: TestComponentViewModel,
+    template: "<h1>Hei</h1>"
+   
+})
+
+
+
 
 
 
