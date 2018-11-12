@@ -77,6 +77,10 @@ D:\Web-utvikling\Mvc5SfoApp\SfoApp\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Web-utvikling\Mvc5SfoApp\SfoApp\bin\Microsoft.Owin.Security.Google.xml
 D:\Web-utvikling\Mvc5SfoApp\SfoApp\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Web-utvikling\Mvc5SfoApp\SfoApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.csprojResolveAssemblyReference.cache
+D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.Migrations.initial_migration.resources
+D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.csproj.GenerateResource.Cache
 D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.dll
 D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.pdb
+D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.csprojResolveAssemblyReference.cache
+D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.Migrations.addSkole.resources
+D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.Migrations.populate_Ansatt_and_Elev.resources
