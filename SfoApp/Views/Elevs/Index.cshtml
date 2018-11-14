@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SfoApp.Models.Elev>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Skole.SkoleNavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fornavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Etternavn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trinn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Klasse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Skole.SkoleNavn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fornavn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Etternavn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trinn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Klasse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefon)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ElevId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ElevId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ElevId })
+        </td>
+    </tr>
+}
+
+</table>

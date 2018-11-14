@@ -1,4 +1,8 @@
 ﻿
+
+
+
+
 var LoginModel = {
     visComp: ko.observable(false),
     visInputBox: ko.observable(false),
@@ -6,9 +10,31 @@ var LoginModel = {
     visVelkom: ko.observable(true),
     velkomTxt: ko.observable("Velkommen login eller registrer deg"),
     title: ko.observable("Prøver igjen"),
-    message: ko.observable("Kontakt er endret igjen!!")
+    message: ko.observable("Kontakt er endret igjen!!"),
+    Username: ko.observable(),
+    Password:ko.observable(),
+    valgtSkole: ko.observable(""),
+    selectHeading : "Velg skole",
+    skoler:ko.observableArray()
+
+   
+// A $( document ).ready() block.
+
 
 }
+
+$(document).ready(function () { 
+
+
+    $.getJSON("http://localhost:2804/api/Skoler", function (data) {
+        console.log("ready!");
+        LoginModel.skoler(data)
+        console.log("Logg av skoler", LoginModel.skoler());
+    })
+
+});//Slutt på Jquery
+
+
 var isEmpty = {
     Name: ko.observable(false),
     UserName: ko.observable(false),
@@ -42,11 +68,37 @@ function LoginComponentViewModel(params) {
     this.self = this;
     self.UserName = params.UserName;
     self.Password = params.Password;
+    
+
+
+
     self.loginBtn = function () {
+        var text = "test";
+        text = LoginModel.valgtSkole();
+        console.log("Log av Login btn resultater", text,LoginModel.Username(),LoginModel.Password())
         LoginModel.visComp(true);
         LoginModel.visInputBox(false);
         LoginModel.velkomTxt("Du er logget inn")
 
+        //$(document).ready(function () { });//Slutt på Jquery
+$.ajax({
+    Type: "POST",
+    url: "/SfoViews/LoginAnsatt",
+    data: { username: LoginModel.Username(), password: LoginModel.Password(), skoleId: LoginModel.valgtSkole() },
+    dataType: "json",
+    success:function(result) {
+        console.log(result)
+        //$('#loginModal').hide(500)
+        $("#loginModal .close").click()
+    },
+    error: function (xhr, status, error) {
+        console.log("Her er noe galt!",xhr,status)
+       
+    }
+})
+
+       
+     
     }
 }
 function alertComponentViewModel(params) {
@@ -115,9 +167,17 @@ function velkomTempl() {
 }
 
 function loginTempl() {
-    return '<div class="form-group" ><label>Brukernavn </label><br><input class="form-control" type="text" name="txtUserName" data-bind="value:UserName"/><br/>' +
-        '<label>Passord</label><br><input class="form-control" type="text" name="txtPassword" data-bind="value:Password"/><br />' +
-        '<button class="btn btn-primary" data-bind="click:loginBtn">Login</button>' +
+    return '<div class="form-group" ><label>Brukernavn </label><br><input class="form-control" type="text" name="txtUserName" data-bind="value:LoginModel.Username"/><br/>' +
+        '</div>' +
+        
+       
+        
+       
+        '<label>Passord</label><br><input class="form-control" type="text" name="txtPassword" data-bind="value:LoginModel.Password"/><br />' +
+
+        '<select data-bind="options: LoginModel.skoler,optionsText:function(item){return item.SkoleNavn},optionsValue:function(item){return item.SkoleId}, value:LoginModel.valgtSkole, optionsCaption:LoginModel.selectHeading"></select>' +
+       
+        '<br><button style="margin-top:20px" class="btn btn-primary" data-bind="click:loginBtn">Login</button>' +
         '</div>'
 }
 
@@ -149,6 +209,8 @@ function alertTempl() {
 
 
 
+
+
 ko.components.register('Velkom-component', {
     viewModel: VelkomComponentViewModel,
     template: velkomTempl()
@@ -173,6 +235,7 @@ ko.components.register('test-component', {
     template: "<h1>Hei</h1>"
    
 })
+
 
 
 

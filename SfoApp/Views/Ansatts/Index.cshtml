@@ -11,28 +11,42 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Skole.SkoleNavn)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.Fornavn)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Etternavn)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+           Ansatt ved
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Skole.SkoleNavn)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.Fornavn)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Etternavn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Skole.SkoleNavn)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AnsattId }) |

@@ -48,7 +48,7 @@ namespace SfoApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AnsattId,Fornavn,Etternavn,SkoleId")] Ansatt ansatt)
+        public ActionResult Create([Bind(Include = "AnsattId,Fornavn,Etternavn,Username,Password,SkoleId")] Ansatt ansatt)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace SfoApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AnsattId,Fornavn,Etternavn,SkoleId")] Ansatt ansatt)
+        public ActionResult Edit([Bind(Include = "AnsattId,Fornavn,Etternavn,Username,Password,SkoleId")] Ansatt ansatt)
         {
             if (ModelState.IsValid)
             {

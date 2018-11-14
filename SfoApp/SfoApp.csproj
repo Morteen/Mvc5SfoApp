@@ -80,12 +80,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -195,11 +207,21 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnsattsController.cs" />
+    <Compile Include="Controllers\API\AnsattesController.cs" />
+    <Compile Include="Controllers\API\SFOsController.cs" />
+    <Compile Include="Controllers\API\SkolerController.cs" />
+    <Compile Include="Controllers\ElevsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SfoViewsController.cs" />
     <Compile Include="Controllers\SkolesController.cs" />
+    <Compile Include="DTO\AnsattDto.cs" />
+    <Compile Include="DTO\DTOHelper.cs" />
+    <Compile Include="DTO\ElevDTO.cs" />
+    <Compile Include="DTO\SjekkInnLoggDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +237,10 @@
     <Compile Include="Migrations\201811122017315_populate_Ansatt_and_Elev.Designer.cs">
       <DependentUpon>201811122017315_populate_Ansatt_and_Elev.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.cs" />
+    <Compile Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.Designer.cs">
+      <DependentUpon>201811131236321_added_username_and_password_to_Ansatt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Ansatt.cs" />
@@ -225,6 +251,7 @@
     <Compile Include="Models\Skole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\SFOViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-flatly.css" />
@@ -294,16 +321,22 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Ansatts\Create.cshtml" />
-    <Content Include="Views\Ansatts\Delete.cshtml" />
-    <Content Include="Views\Ansatts\Details.cshtml" />
-    <Content Include="Views\Ansatts\Edit.cshtml" />
-    <Content Include="Views\Ansatts\Index.cshtml" />
     <Content Include="Views\Skoles\Create.cshtml" />
     <Content Include="Views\Skoles\Delete.cshtml" />
     <Content Include="Views\Skoles\Details.cshtml" />
     <Content Include="Views\Skoles\Edit.cshtml" />
     <Content Include="Views\Skoles\Index.cshtml" />
+    <Content Include="Views\Elevs\Create.cshtml" />
+    <Content Include="Views\Elevs\Delete.cshtml" />
+    <Content Include="Views\Elevs\Details.cshtml" />
+    <Content Include="Views\Elevs\Edit.cshtml" />
+    <Content Include="Views\Elevs\Index.cshtml" />
+    <Content Include="Views\Ansatts\Create.cshtml" />
+    <Content Include="Views\Ansatts\Delete.cshtml" />
+    <Content Include="Views\Ansatts\Details.cshtml" />
+    <Content Include="Views\Ansatts\Edit.cshtml" />
+    <Content Include="Views\Ansatts\Index.cshtml" />
+    <Content Include="Views\SfoViews\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -325,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811122017315_populate_Ansatt_and_Elev.resx">
       <DependentUpon>201811122017315_populate_Ansatt_and_Elev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.resx">
+      <DependentUpon>201811131236321_added_username_and_password_to_Ansatt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
