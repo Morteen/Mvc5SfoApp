@@ -1,15 +1,14 @@
-﻿
+﻿@using SfoApp.Models
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title ="Sfo Sjekkinn";
 }
 
-<h2>Index</h2>
-<h2 data-bind="text:title"></h2>
-<h3 data-bind="text:message"></h3>
-
-<!-- Trigger the modal with a button -->
 
 
+
+
+<div class="loginClass"  data-bind="visible:true">
 <!-- Modal for å logge inn-->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -23,7 +22,7 @@
             <div class="modal-body">
                 <div data-bind="component:{
                          name:'login-component',
-                         params:{UserName:'Morten',Password:'1234' }
+                        
                                 }">
             </div>
             <div class="modal-footer">
@@ -47,57 +46,43 @@
 }">
     </div>
 </div>
-<!--params:{velkomTxt:'Hei login eller registrer deg :-)'  }-->
 
-
-
-
-<div data-bind="visible:visInputBox">
-    <div data-bind="component:{
-    name:'login-component',
-    params:{UserName:'Morten',Password:'1234' }
-}">
-    </div>
-</div>
-
-<div data-bind="visible:visRegForm">
-    <div data-bind="component:{
-    name:'regForm-component',
- params:{Name:'',UserName:'',Password:'',email:'' }
-
-}"></div>
-</div>
-
-<div data-bind="visible:visComp">
-    <div data-bind="component:{
+    <div data-bind="visible:visAlert">
+        <div data-bind="component:{
     name:'alert-component',
-    params:{ Message:'Dette ble en suksess igjen',Klasse:'alert alert-success'}
+  
 
 }"></div>
-</div>
+    </div>
 
-
-<!---->
-<div class="page active" id="home">
-    <h1>Home</h1>
-    <ol>
-        <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
-        <li><a href="#" data-target="list" class="nav-link">LIST</a></li>
-        <li><a href="#" data-target="detail" class="nav-link">DETAIL</a></li>
-    </ol>
-</div>
-
-<div class="page" id="list">
-    <h1>List</h1>
-    <ol>
-        <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
-        <li><a href="#" data-target="list" class="nav-link">LIST</a></li>
-        <li><a href="#" data-target="detail" class="nav-link">DETAIL</a></li>
-    </ol>
+</div><!--SluttPå loginClass-->
 
 
 
-    <div data-bind="component:{
+
+<div class="LoggedIn" data-bind="visible:true">
+
+    <!---->
+    <div class="page active" id="home">
+        <h1>Home</h1>
+        <ol>
+            <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
+            <li><a href="#" data-target="list" class="nav-link">LIST</a></li>
+            <li><a href="#" data-target="detail" class="nav-link">DETAIL</a></li>
+        </ol>
+    </div>
+
+    <div class="page" id="list">
+        <h1>List</h1>
+        <ol>
+            <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
+            <li><a href="#" data-target="list" class="nav-link">LIST</a></li>
+            <li><a href="#" data-target="detail" class="nav-link">DETAIL</a></li>
+        </ol>
+
+
+
+        <div data-bind="component:{
     name:'test-component'
 
 
@@ -106,17 +91,19 @@
 
 
 
-</div>
+    </div>
 
-<div class="page" id="detail">
-    <h1>Detail</h1>
-    <ol>
-        <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
-        <li><a href="#" data-target="list" class="nav-link">LIST</a></li>
-        <li><a href="#" data-target="detail" class="nav-link">DETAIL</a></li>
-    </ol>
-</div>
+    <div class="page" id="detail">
+        <h1>Detail</h1>
+        <ol>
+            <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
+            <li><a href="#" data-target="list" class="nav-link">LIST</a></li>
+            <li><a href="#" data-target="detail" class="nav-link">DETAIL</a></li>
+        </ol>
+    </div>
 
+
+</div><!--Slutt På LoggedIn-->
 
 @section scripts{
 

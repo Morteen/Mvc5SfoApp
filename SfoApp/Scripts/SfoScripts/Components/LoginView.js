@@ -2,28 +2,30 @@
 
 
 
-
 var LoginModel = {
-    visComp: ko.observable(false),
+    visAlert: ko.observable(false),
     visInputBox: ko.observable(false),
     visRegForm: ko.observable(false),
     visVelkom: ko.observable(true),
-    velkomTxt: ko.observable("Velkommen login eller registrer deg"),
+    visLink: ko.observable(true),
+    velkomTxt: ko.observable("Velkommen Bruk linkene til høyre for å logge inn eller registrere deg"),
     title: ko.observable("Prøver igjen"),
     message: ko.observable("Kontakt er endret igjen!!"),
-    Username: ko.observable(),
-    Password:ko.observable(),
-    valgtSkole: ko.observable(""),
-    selectHeading : "Velg skole",
-    skoler:ko.observableArray()
+    alertMessage: ko.observable(),
+    alertKlasse: ko.observable(),
+    Username: ko.observable(''),
+    Password: ko.observable(''),
+    valgtSkole: ko.observable(null),
+    selectHeading: "Velg skole",
+    skoler: ko.observableArray()
 
-   
-// A $( document ).ready() block.
+
+
 
 
 }
 
-$(document).ready(function () { 
+$(document).ready(function () {
 
 
     $.getJSON("http://localhost:2804/api/Skoler", function (data) {
@@ -39,17 +41,11 @@ var isEmpty = {
     Name: ko.observable(false),
     UserName: ko.observable(false),
     Password: ko.observable(false),
-    email: ko.observable(false)
-}
-
-var User = {
-    name: ko.observable(),
-    username: ko.observable(),
-    password: ko.observable(),
-    email: ko.observable()
-
+    email: ko.observable(false),
+    skoleValg: ko.observable(false)
 
 }
+
 
 function VelkomComponentViewModel() {
     this.self = this;
@@ -63,147 +59,110 @@ function VelkomComponentViewModel() {
     }
 }
 
-
-function LoginComponentViewModel(params) {
+function alertComponentViewModel() {
     this.self = this;
-    self.UserName = params.UserName;
-    self.Password = params.Password;
-    
+    self.Message = LoginModel.alertMessage();
+    self.Klasse = LoginModel.alertKlasse();
 
+}
+
+
+function LoginComponentViewModel() {
+    this.self = this;
 
 
     self.loginBtn = function () {
-        var text = "test";
-        text = LoginModel.valgtSkole();
-        console.log("Log av Login btn resultater", text,LoginModel.Username(),LoginModel.Password())
-        LoginModel.visComp(true);
-        LoginModel.visInputBox(false);
-        LoginModel.velkomTxt("Du er logget inn")
+        console.log("Log av Login btn resultater",
+            LoginModel.valgtSkole(),
+            LoginModel.Username(),
+            LoginModel.Password())
 
-        //$(document).ready(function () { });//Slutt på Jquery
-$.ajax({
-    Type: "POST",
-    url: "/SfoViews/LoginAnsatt",
-    data: { username: LoginModel.Username(), password: LoginModel.Password(), skoleId: LoginModel.valgtSkole() },
-    dataType: "json",
-    success:function(result) {
-        console.log(result)
-        //$('#loginModal').hide(500)
-        $("#loginModal .close").click()
-    },
-    error: function (xhr, status, error) {
-        console.log("Her er noe galt!",xhr,status)
-       
-    }
-})
 
-       
-     
-    }
-}
-function alertComponentViewModel(params) {
-    this.self = this;
-    self.Message = ko.observable(params.Message)
-    self.Klasse = params.Klasse
-
-}
-function RegFormComponentViewModel(params) {
-    this.self = this;
-    self.Name = ko.observable(params.Name),
-    self.UserName = ko.observable(params.UserName),
-    self.Password = ko.observable(params.Password),
-    self.email = ko.observable(params.email)
+        if (LoginModel.Username() !== '' && LoginModel.Password() && LoginModel.valgtSkole() !== undefined) {
 
 
 
 
 
+            $.ajax({
+                Type: "POST",
+                url: "/SfoViews/LoginAnsatt",
+                data: {
+                    username: LoginModel.Username(),
+                    password: LoginModel.Password(),
+                    skoleId: LoginModel.valgtSkole()
+                },
+                dataType: "json",
+                success: function (result) {
+                    console.log(result)
+                    $("#loginModal .close").click()
+                    LoginModel.velkomTxt("Du er logget inn")
+                    LoginModel.visLink(false)
+                },
+                error: function (xhr, status, error) {
 
-    self.regUser = function () {
+                    LoginModel.alertMessage("   Noe er galt med brukernavn,passord eller valgt arbeidsted");
+                    LoginModel.alertKlasse('alert alert-danger')
+                    LoginModel.visAlert(true)
 
-        if (self.Name() !== '' && self.UserName() !== '' && self.Password() && self.email() !== '') {
-
-            LoginModel.visRegForm(false)
-            LoginModel.velkomTxt("Du er registrert")
-            LoginModel.visVelkom(true)
-            var jsonData = ko.toJSON({ name: self.Name(), username: self.UserName(), password: self.Password(), email: self.email() });
-            console.log("Jsondata:", jsonData)
+                    console.log("Her er noe galt!", xhr, status)
+                    console.log(LoginModel.alertKlasse())
+                    $("#loginModal .close").click()
+                }
+            })
         } else {
-            if (self.Name() === '') { isEmpty.Name(true) } else { isEmpty.Name(false) }
 
-            if (self.UserName() === '') { isEmpty.UserName(true) } else { isEmpty.UserName(false) }
+            if (LoginModel.Username() === '') { isEmpty.UserName(true) } else { isEmpty.UserName(false) }
 
-            if (self.Password() === '') { isEmpty.Password(true) } else { isEmpty.Password(false) }
+            if (LoginModel.Password() === '') { isEmpty.Password(true) } else { isEmpty.Password(false) }
 
-            if (self.email() === '') { isEmpty.email(true) } else { isEmpty.email(false) }
-
+            if (LoginModel.valgtSkole() == undefined) { isEmpty.skoleValg(true) }
         }
 
 
+
     }
-
-
 }
 
 
 
 
- function TestComponentViewModel(){
-   
-    TestTemplate: ko.observable()
-
-
-}
 
 
 
 
 function velkomTempl() {
-    return '<div class="jumbotron" >' +
+    return '<div class="jumbotron" id="VelkomJumbo">' +
          '<h3 data-bind="text:LoginModel.velkomTxt" style="margin:auto"></h3>' +
-        '<button class="btn btn-link" data-bind="click:toLoginForm">Login</button>' +
-        '<button class="btn btn-link" data-bind="click:toRegform">Registrer deg</button>' +
+     
+     
         '</div>'
 }
 
 function loginTempl() {
-    return '<div class="form-group" ><label>Brukernavn </label><br><input class="form-control" type="text" name="txtUserName" data-bind="value:LoginModel.Username"/><br/>' +
-        '</div>' +
-        
-       
-        
-       
-        '<label>Passord</label><br><input class="form-control" type="text" name="txtPassword" data-bind="value:LoginModel.Password"/><br />' +
+    return '<div class="form-group" >' +
+        '<label>Brukernavn </label><br>' +
+        '<input class="form-control" type="text" name="txtUserName" data-bind="value:LoginModel.Username"/>' +
+        '<span class="MyErrors" data-bind="visible:isEmpty.UserName"> Dette feltet må fylles ut</span><br>' +
 
-        '<select data-bind="options: LoginModel.skoler,optionsText:function(item){return item.SkoleNavn},optionsValue:function(item){return item.SkoleId}, value:LoginModel.valgtSkole, optionsCaption:LoginModel.selectHeading"></select>' +
-       
-        '<br><button style="margin-top:20px" class="btn btn-primary" data-bind="click:loginBtn">Login</button>' +
-        '</div>'
-}
-
-function RegFormTempl() {
-
-    return '<div class="form-group">' +
- '<label>Navn </label><br><input class="form-control" type="text" name="txtName" data-bind="value:Name"data-bind="if:isEmpty.Name" data-bind="css:MyErrors"/>' +
-  '<span class="MyErrors" data-bind="visible:isEmpty.Name"> Dette feltet må fylles ut</span><br>' +
-
-    '<label>Brukernavn </label><br><input class="form-control" type="text" name="txtUserName" data-bind="value:UserName"/>' +
-     '<span class="MyErrors" data-bind="visible:isEmpty.UserName"> Dette feltet må fylles ut</span><br>' +
-
-    '<label>Passord </label><br><input class="form-control" type="password" name="txtPasswor" data-bind="value:Password"/>' +
+       '<label>Passord</label><br>' +
+        '<input class="form-control" type="text" name="txtPassword" data-bind="value:LoginModel.Password"/>' +
         '<span class="MyErrors" data-bind="visible:isEmpty.Password"> Dette feltet må fylles ut</span><br>' +
 
-        '<label>E-mail</label><br><input class="form-control" type="email" name="txtEmail" data-bind="value:email"/>' +
-        '<span class="MyErrors" data-bind="visible:isEmpty.email"> Dette feltet må fylles ut</span><br>' +
-        '<button class="btn btn-primary" data-bind="click:regUser">Lagre</button>' +
-        '</div>'
+        '<select class="form-control" data-bind="options: LoginModel.skoler,optionsText:function(item){return item.SkoleNavn},optionsValue:function(item){return item.SkoleId}, value:LoginModel.valgtSkole, optionsCaption:LoginModel.selectHeading"></select>' +
+        '<span class="MyErrors" data-bind="visible:isEmpty.skoleValg"> Ingen skole er valgt</span><br>'+
+    '<br><button style="margin-top:20px" class="btn btn-primary" data-bind="click:loginBtn">Login</button>' +
+    '</div>'
 }
 
+
+
 function alertTempl() {
-    return '<div data-bind="css:Klasse" role="alert" >' +
-    '<strong>Gratulerer </strong><span data-bind="text:Message"></span>' +
-    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-      '<span aria-hidden="true">&times;</span> </button>' +
+    return '<div data-bind="css:LoginModel.alertKlasse" role="alert" >' +
+    '<strong>Mislykket innlogging </strong><button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span> </button>' +
+        '<br><span data-bind="text:LoginModel.alertMessage"></span>' +
+
       '</div>'
 }
 
@@ -219,25 +178,13 @@ ko.components.register('login-component', {
     viewModel: LoginComponentViewModel,
     template: loginTempl()
 })
-ko.components.register('regForm-component', {
-    viewModel: RegFormComponentViewModel,
-    template: RegFormTempl()
-})
+
+
 
 ko.components.register('alert-component', {
     viewModel: alertComponentViewModel,
     template: alertTempl()
 })
-
-
-ko.components.register('test-component', {
-    viewModel: TestComponentViewModel,
-    template: "<h1>Hei</h1>"
-   
-})
-
-
-
 
 
 

@@ -27,6 +27,13 @@ textarea {
     font-weight: bold;
     font-style:italic
 }
+
+
+#VelkomJumbo{
+    margin-top: 20px;
+}
+
+
 *{
     padding: 0;
     margin: 0;

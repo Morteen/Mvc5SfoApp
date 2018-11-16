@@ -14,9 +14,10 @@
     }
 }
 else
-{
+{<div class="loginClass">
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li><button style="margin-top: 7px" class="btn btn-link" data-toggle="modal" data-target="#myModal">Logg inn</button></li>
+        <li data-bind="visible:visLink">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li  data-bind="visible:visLink"><button style="margin-top: 7px" class="btn btn-link" data-toggle="modal" data-target="#myModal">Logg inn</button></li>
     </ul>
+</div>
 }
