@@ -1,13 +1,18 @@
 ﻿
-
+if (typeof (Storage) !== "undefined") {
+    window.sessionStorage
+    console.log("Noe localstorage virker")
+} else {
+    console.log("Sorry! No Web Storage support..")
+}
 
 
 var LoginModel = {
+    loginComponenter: ko.observable(true),
     visAlert: ko.observable(false),
-    visInputBox: ko.observable(false),
-    visRegForm: ko.observable(false),
     visVelkom: ko.observable(true),
     visLink: ko.observable(true),
+   
     velkomTxt: ko.observable("Velkommen Bruk linkene til høyre for å logge inn eller registrere deg"),
     title: ko.observable("Prøver igjen"),
     message: ko.observable("Kontakt er endret igjen!!"),
@@ -96,8 +101,16 @@ function LoginComponentViewModel() {
                 success: function (result) {
                     console.log(result)
                     $("#loginModal .close").click()
-                    LoginModel.velkomTxt("Du er logget inn")
-                    LoginModel.visLink(false)
+                    LoginModel.loginComponenter(false)
+                    LoginModel.visVelkom(false)
+                    $("#LoggedIn").show()
+                    $("#loginLinker").hide()
+
+                    //LoginModel.velkomTxt("Du er logget inn")
+                        LoginModel.visLink(false)
+                        
+                    sessionStorage.setItem("showLoggedIn", "true");
+                    alert("sessionStorage", sessionStorage.getItem("showLoggedIn"))
                 },
                 error: function (xhr, status, error) {
 
@@ -189,6 +202,6 @@ ko.components.register('alert-component', {
 
 
 
-ko.applyBindings(LoginModel);
+ko.applyBindings(LoginModel,$("#loginClass")[0]);
 
 

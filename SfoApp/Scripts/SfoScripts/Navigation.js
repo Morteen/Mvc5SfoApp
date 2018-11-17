@@ -42,3 +42,15 @@
 }
 
 document.addEventListener('DOMContentLoaded', app.init);
+
+
+var NavModel= {
+    LogInlinkVisible: ko.observable(true)
+
+    
+}
+if (sessionStorage.getItem("showLoggedIn")) {
+   
+}
+
+ko.applyBindings(NavModel, $("#loginLinker")[0]);

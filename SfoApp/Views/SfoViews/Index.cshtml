@@ -8,7 +8,7 @@
 
 
 
-<div class="loginClass"  data-bind="visible:true">
+<div class="loginClass" id="loginClass"  data-bind="visible:loginComponenter">
 <!-- Modal for å logge inn-->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -42,25 +42,33 @@
 <div data-bind="visible:visVelkom">
     <div data-bind="component:{
     name:'Velkom-component',
-
-}">
+    }">
     </div>
-</div>
+ </div>
 
     <div data-bind="visible:visAlert">
         <div data-bind="component:{
-    name:'alert-component',
-  
-
-}"></div>
-    </div>
+        name:'alert-component',
+        }"></div>
+      </div>
 
 </div><!--SluttPå loginClass-->
 
 
 
 
-<div class="LoggedIn" data-bind="visible:true">
+<div class="LoggedIn" id="LoggedIn" data-bind="visible:showLoggedIn">
+    
+
+    <div class="page" id="elever">
+        <h1>Elever</h1>
+     
+            <div data-bind="component:{
+        name:'elever-component',
+        }"></div>
+        
+
+    </div>
 
     <!---->
     <div class="page active" id="home">
@@ -81,17 +89,8 @@
         </ol>
 
 
-
-        <div data-bind="component:{
-    name:'test-component'
-
-
-}"></div>
-
-
-
-
     </div>
+
 
     <div class="page" id="detail">
         <h1>Detail</h1>
@@ -105,15 +104,10 @@
 
 </div><!--Slutt På LoggedIn-->
 
-@section scripts{
 
-    <script type="text/javascript">
-      
-
-
-     
+@section scripts
+{
+    <script>
+        $("#LoggedIn").hide()
     </script>
-
-
 }
-
