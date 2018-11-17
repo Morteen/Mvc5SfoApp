@@ -26,7 +26,8 @@ namespace SfoApp
                 "~/Scripts/SfoScripts/test.js",
                 "~/Scripts/SfoScripts/Components/LoginView.js",
                 "~/Scripts/SfoScripts/Components/VisElever.js",
-                "~/Scripts/SfoScripts/Navigation.js"
+                "~/Scripts/SfoScripts/Navigation.js",
+                "~/Scripts/bootbox.js"
                 ));
 
 

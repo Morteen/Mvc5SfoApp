@@ -72,10 +72,33 @@ function alertComponentViewModel() {
 }
 
 
+function LogOutComponentViewModel() {
+    this.self = this;
+
+    self.logOutBtn = function () {
+       
+        $("#sfoLinker").hide()
+        $("#LoggedIn").hide()
+        $("#logOutLinker").hide()
+        $("#loginLinker").show()
+
+        LoginModel.visLink(true)
+        LoginModel.loginComponenter(true)
+        LoginModel.visVelkom(true)
+
+        LoginModel.valgtSkole(''),
+            LoginModel.Username(''),
+            LoginModel.Password('')
+        $("#logOutModal .close").click()
+        
+    }
+}
+
+
 function LoginComponentViewModel() {
     this.self = this;
 
-
+    
     self.loginBtn = function () {
         console.log("Log av Login btn resultater",
             LoginModel.valgtSkole(),
@@ -105,12 +128,14 @@ function LoginComponentViewModel() {
                     LoginModel.visVelkom(false)
                     $("#LoggedIn").show()
                     $("#loginLinker").hide()
+                    $("#logOutLinker").show()
+                    $("#sfoLinker").show()
 
                     //LoginModel.velkomTxt("Du er logget inn")
                         LoginModel.visLink(false)
                         
                     sessionStorage.setItem("showLoggedIn", "true");
-                    alert("sessionStorage", sessionStorage.getItem("showLoggedIn"))
+                 
                 },
                 error: function (xhr, status, error) {
 
@@ -152,6 +177,13 @@ function velkomTempl() {
         '</div>'
 }
 
+function logOutTempl() {
+    return '<div id="logOutStyle">Er du sikker på at du skal logge ut?' +
+        '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+        '<button style="margin:5px" class="btn btn-warning btn-sm" data-bind="click:logOutBtn">Logg ut</button><div>' 
+
+}
+
 function loginTempl() {
     return '<div class="form-group" >' +
         '<label>Brukernavn </label><br>' +
@@ -190,6 +222,11 @@ ko.components.register('Velkom-component', {
 ko.components.register('login-component', {
     viewModel: LoginComponentViewModel,
     template: loginTempl()
+})
+
+ko.components.register('logOut-component', {
+    viewModel: LogOutComponentViewModel,
+    template: logOutTempl()
 })
 
 

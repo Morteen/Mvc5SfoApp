@@ -53,4 +53,4 @@ if (sessionStorage.getItem("showLoggedIn")) {
    
 }
 
-ko.applyBindings(NavModel, $("#loginLinker")[0]);
+ko.applyBindings(NavModel, $("#loginLinker")[0]); 

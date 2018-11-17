@@ -10,8 +10,8 @@ var ElevModel= {
 
 
 function VisEleverViewModel() {
-   
 
+    this.self = this;
 }
 function eleverTempl() {
     return '<div >' +
@@ -23,6 +23,6 @@ function eleverTempl() {
 
 ko.components.register('elever-component', {
     viewModel: VisEleverViewModel,
-    template: eleverTempl()
+    template: '<h3 data-bind="text:elever">Hei fra elever</h3>' 
 })
 ko.applyBindings(ElevModel, $("#elever")[0]);

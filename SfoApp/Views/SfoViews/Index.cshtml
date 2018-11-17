@@ -8,51 +8,72 @@
 
 
 
-<div class="loginClass" id="loginClass"  data-bind="visible:loginComponenter">
-<!-- Modal for å logge inn-->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<div class="loginClass" id="loginClass" >
+    <!-- Small modal -->
+   
 
-        <!-- Modal content-->
-        <div class="modal-content" id="loginModal">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Login</h3>
-            </div>
-            <div class="modal-body">
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" id="logOutModal">
+              
+
                 <div data-bind="component:{
+                         name:'logOut-component',
+                        
+                                }">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div  data-bind="visible:loginComponenter">
+    <!-- Modal for å logge inn-->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content" id="loginModal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Login</h3>
+                </div>
+                <div class="modal-body">
+                    <div data-bind="component:{
                          name:'login-component',
                         
                                 }">
-            </div>
-            <div class="modal-footer">
+                    </div>
+                    <div class="modal-footer">
                
+                    </div>
+                </div>
+
             </div>
         </div>
-
     </div>
-</div>
-</div>
+    
+    
 
 
 
 
-
-
-<div data-bind="visible:visVelkom">
+    <div data-bind="visible:visVelkom">
     <div data-bind="component:{
     name:'Velkom-component',
     }">
     </div>
  </div>
 
-    <div data-bind="visible:visAlert">
-        <div data-bind="component:{
+        <div data-bind="visible:visAlert">
+            <div data-bind="component:{
         name:'alert-component',
         }"></div>
-      </div>
+        </div>
+        
+    </div>
 
-</div><!--SluttPå loginClass-->
+    </div><!--SluttPå loginClass-->
 
 
 
@@ -62,10 +83,17 @@
 
     <div class="page" id="elever">
         <h1>Elever</h1>
-     
-            <div data-bind="component:{
+        <span data-bind="text:elever"></span>
+        
+        
+
+        <div data-bind="component:{
         name:'elever-component',
         }"></div>
+        <div data-bind="component:{
+    name:'elever-component',
+    }">
+        </div>
         
 
     </div>
@@ -109,5 +137,23 @@
 {
     <script>
         $("#LoggedIn").hide()
+        $("#logOutLinker").hide()
+        $("#sfoLinker").hide()
+
+
+        $("#logOutBtn").on("click", function () {
+            bootbox.confirm("Er du sikker på at du vil Logge ut?",
+                function (result) {
+                    if (result) {
+
+
+                    }
+                })
+
+        })
+
+       
+
+
     </script>
 }

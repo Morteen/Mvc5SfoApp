@@ -55,7 +55,7 @@ textarea {
 /**** PAGES ****/
 .page{
     display: none;
-     width: 95%;
+     width: 100%;
    margin-top: 3%;
     padding: 1rem 2rem;
  
@@ -78,5 +78,11 @@ textarea {
     font-weight: 900;
 }*/
 #loginModal{
+    background-color: cornsilk;
+}
+#logOutStyle{
+    margin:auto;
+    padding:5px;
+    padding-right: 7px;
     background-color: cornsilk;
 }
