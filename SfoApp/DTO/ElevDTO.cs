@@ -17,7 +17,6 @@ namespace SfoApp.DTO
         public string Klasse { get; set; }
         public string Telefon { get; set; }
 
-
         public int SkoleId { get; set; }
 
 

@@ -55,5 +55,26 @@ namespace SfoApp.Controllers
             }
 
         }
+
+        public ActionResult GetElever(int skoleId)
+        {
+            var dtoElevListe = DTOHelper.ElevListMapper(_context.Elever.Where(e=>e.SkoleId==skoleId).ToList());
+
+
+            if (dtoElevListe == null) { 
+
+            return Json(dtoElevListe, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+        
+
+
     }
 }

@@ -1,14 +1,9 @@
 ﻿
-if (typeof (Storage) !== "undefined") {
-    window.sessionStorage
-    console.log("Noe localstorage virker")
-} else {
-    console.log("Sorry! No Web Storage support..")
-}
 
 
 var LoginModel = {
     loginComponenter: ko.observable(true),
+    idResultSkoleId: ko.observable(),
     visAlert: ko.observable(false),
     visVelkom: ko.observable(true),
     visLink: ko.observable(true),
@@ -90,7 +85,10 @@ function LogOutComponentViewModel() {
             LoginModel.Username(''),
             LoginModel.Password('')
         $("#logOutModal .close").click()
-        
+
+        sessionStorage.clear();
+        $("#hiddenSkoleId").val('')
+       LoginModel.idResultSkoleId(null)
     }
 }
 
@@ -134,9 +132,14 @@ function LoginComponentViewModel() {
                     //LoginModel.velkomTxt("Du er logget inn")
                         LoginModel.visLink(false)
                         
-                    sessionStorage.setItem("showLoggedIn", "true");
-                 
+                        sessionStorage.setItem("AnsattNavn", result.Fornavn+" "+result.Etternavn);
+                        sessionStorage.SkoleId = result.SkoleId;
+                        console.log(sessionStorage.AnsattNavn)
+                    //prøver å lagre verdien i et hidden field
+                        $("#hiddenSkoleId").val(result.SkoleId)
+                    LoginModel.idResultSkoleId(result.SkoleId)
                 },
+
                 error: function (xhr, status, error) {
 
                     LoginModel.alertMessage("   Noe er galt med brukernavn,passord eller valgt arbeidsted");

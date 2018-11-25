@@ -73,7 +73,12 @@
         
     </div>
 
-    </div><!--SluttPå loginClass-->
+    <form>
+        <input type="hidden" id="hiddenSkoleId" name="hiddenSkoleId" />
+
+    </form>
+
+</div><!--SluttPå loginClass-->
 
 
 
@@ -89,12 +94,10 @@
 
         <div data-bind="component:{
         name:'elever-component',
-        }"></div>
-        <div data-bind="component:{
-    name:'elever-component',
-    }">
-        </div>
+        }">
+      </div>
         
+ 
 
     </div>
 
@@ -130,30 +133,34 @@
     </div>
 
 
-</div><!--Slutt På LoggedIn-->
-
 
 @section scripts
 {
     <script>
+       /* var num = LoginModel.idResultSkoleId()
+        console.log("Dette er log av skoleId:", LoginModel.idResultSkoleId())
+        console.log("Dette er log av num:",num)*/
+
+       // ElevModel.ElevSkoleId(num);
+       // console.log("Dette er log  ElevModel.ElevSkoleId:", ElevModel.ElevSkoleId())
+       
+
+        if (typeof (Storage) !== "undefined") {
+            window.sessionStorage
+            console.log("Noe localstorage virker")
+            sessionStorage.setItem("SkoleId",'');
+        } else {
+            console.log("Sorry! No Web Storage support..")
+        }
+
         $("#LoggedIn").hide()
         $("#logOutLinker").hide()
         $("#sfoLinker").hide()
 
 
-        $("#logOutBtn").on("click", function () {
-            bootbox.confirm("Er du sikker på at du vil Logge ut?",
-                function (result) {
-                    if (result) {
 
-
-                    }
-                })
-
-        })
 
        
-
-
+        
     </script>
 }

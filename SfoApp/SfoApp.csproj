@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnsattsController.cs" />
     <Compile Include="Controllers\API\AnsattesController.cs" />
+    <Compile Include="Controllers\API\EleverController.cs" />
     <Compile Include="Controllers\API\SFOsController.cs" />
     <Compile Include="Controllers\API\SkolerController.cs" />
     <Compile Include="Controllers\ElevsController.cs" />
