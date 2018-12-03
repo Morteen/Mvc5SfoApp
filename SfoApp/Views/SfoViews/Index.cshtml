@@ -12,7 +12,8 @@
     <!-- Small modal -->
    
 
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true<meta name="description" content="The description of my page" />
+">
         <div class="modal-dialog modal-sm">
             <div class="modal-content" id="logOutModal">
               
@@ -71,12 +72,9 @@
         }"></div>
         </div>
         
-    </div>
+   
 
-    <form>
-        <input type="hidden" id="hiddenSkoleId" name="hiddenSkoleId" />
-
-    </form>
+   
 
 </div><!--SluttPå loginClass-->
 
@@ -87,11 +85,8 @@
     
 
     <div class="page" id="elever">
-        <h1>Elever</h1>
-        <span data-bind="text:elever"></span>
-        
-        
-
+        <h1></h1>
+        <span data-bind="text:Skolenavn"></span>
         <div data-bind="component:{
         name:'elever-component',
         }">
@@ -132,17 +127,12 @@
         </ol>
     </div>
 
-
+    </div>
 
 @section scripts
 {
     <script>
-       /* var num = LoginModel.idResultSkoleId()
-        console.log("Dette er log av skoleId:", LoginModel.idResultSkoleId())
-        console.log("Dette er log av num:",num)*/
-
-       // ElevModel.ElevSkoleId(num);
-       // console.log("Dette er log  ElevModel.ElevSkoleId:", ElevModel.ElevSkoleId())
+     
        
 
         if (typeof (Storage) !== "undefined") {

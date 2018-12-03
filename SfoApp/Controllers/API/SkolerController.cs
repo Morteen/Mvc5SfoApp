@@ -23,6 +23,9 @@ namespace SfoApp.Controllers.API
         {
             return _context.Skoler.ToList();
         }
-
+        public Skole GetSkole(int id)
+        {
+            return _context.Skoler.Where(s => s.SkoleId == id).SingleOrDefault();
+        }
     }
 }
