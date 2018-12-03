@@ -27,14 +27,11 @@ namespace SfoApp.Controllers.API
         }
 
         // GET: api/Elever/1
-        public ElevDTO GetElev(int skoleId)  
+        public IEnumerable<ElevDTO> GetElev(int skoleId)
         {
-
-      
-            var elev= _context.Elever.Find(5);
            
-            var EleverDto = DTOHelper.Elevmapper(elev);
-            return EleverDto;
+
+            return DTOHelper.ElevListMapper(_context.Elever.Where(e => e.SkoleId == skoleId).ToList());
         }
 
 

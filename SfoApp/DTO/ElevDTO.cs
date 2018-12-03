@@ -9,9 +9,8 @@ namespace SfoApp.DTO
     {
 
 
-      
+        public int ElevId { get; set; }
         public string Fornavn { get; set; }
-      
         public string Etternavn { get; set; }
         public int Trinn { get; set; }
         public string Klasse { get; set; }

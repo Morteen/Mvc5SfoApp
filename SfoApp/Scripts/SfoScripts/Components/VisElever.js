@@ -11,6 +11,7 @@ console.log("Dette er log av skoleId fra VisElever.js filen:", LoginModel.idResu
 var ElevModel = {
     elever: ko.observable("hei hei fra elever"),
     Skolenavn: ko.observable(),
+    SkoleId:ko.observable(),
     elevlisteLaster: ko.observable(true),
     elevlisteDiv: ko.observable(false),
   
@@ -29,6 +30,7 @@ function notify() {
     
     console.log("Dette er log av skoleId fra VisElever.js filen etter link:", LoginModel.idResultSkoleId())
     getSkole();
+    getElever();
 }
 $("#ElverLink").on("click", notify);
 
@@ -80,6 +82,7 @@ function getSkole() {
        dataType: "json",
         success: function (result) {
             ElevModel.Skolenavn(result.SkoleNavn);
+            ElevModel.SkoleId(result.SkoleId);
             ElevModel.elevlisteLaster(false);
             ElevModel.elevlisteDiv(true);
            console.log("Skole resultater:", result.SkoleNavn)
@@ -93,4 +96,25 @@ function getSkole() {
         }
     })
 
+}
+
+function getElever() {
+   
+
+    $.ajax({
+        Type: "GET",
+        url: "/http://localhost:2804/api/Elever?skoleId=" + ElevModel.SkoleId(),
+        dataType: "json",
+        success: function (result) {
+            
+            console.log("Elev resultater:", result)
+
+        },
+        error: function (xhr, status, error) {
+
+          
+            console.log("Her gikk noe galt i å hente elever!", xhr, status)
+
+        }
+    })
 }

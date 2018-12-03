@@ -18,6 +18,7 @@ namespace SfoApp.DTO
         public static ElevDTO Elevmapper(Elev elev)
         {
             var dtoElev = new ElevDTO();
+            dtoElev.ElevId = elev.ElevId;
             dtoElev.Fornavn = elev.Fornavn;
             dtoElev.Etternavn = elev.Etternavn;
             dtoElev.Klasse = elev.Klasse;
@@ -34,6 +35,7 @@ namespace SfoApp.DTO
         public static Elev DtoToElevMapper(ElevDTO dto)
         {
             Elev elev= new Elev();
+            elev.ElevId = dto.ElevId;
             elev.Fornavn = dto.Fornavn;
             elev.Etternavn = dto.Etternavn;
             elev.Klasse = dto.Klasse;
