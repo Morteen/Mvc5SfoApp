@@ -8,6 +8,7 @@ var LoginModel = {
     visVelkom: ko.observable(true),
     visLink: ko.observable(true),
    
+   
     velkomTxt: ko.observable("Velkommen Bruk linkene til høyre for å logge inn eller registrere deg"),
     title: ko.observable("Prøver igjen"),
     message: ko.observable("Kontakt er endret igjen!!"),
@@ -124,6 +125,7 @@ function LoginComponentViewModel() {
                     $("#loginModal .close").click()
                     LoginModel.loginComponenter(false)
                     LoginModel.visVelkom(false)
+                 
                     $("#LoggedIn").show()
                     $("#loginLinker").hide()
                     $("#logOutLinker").show()

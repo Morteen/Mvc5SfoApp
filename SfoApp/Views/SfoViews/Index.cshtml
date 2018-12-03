@@ -12,8 +12,7 @@
     <!-- Small modal -->
    
 
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true<meta name="description" content="The description of my page" />
-">
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"><meta name="description" content="The description of my page" />
         <div class="modal-dialog modal-sm">
             <div class="modal-content" id="logOutModal">
               
@@ -28,7 +27,7 @@
         </div>
     </div>
     
-    <div  data-bind="visible:loginComponenter">
+<div  data-bind="visible:loginComponenter">
     <!-- Modal for å logge inn-->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -60,33 +59,34 @@
 
 
     <div data-bind="visible:visVelkom">
-    <div data-bind="component:{
+        <div data-bind="component:{
     name:'Velkom-component',
     }">
+        </div>
     </div>
- </div>
 
-        <div data-bind="visible:visAlert">
-            <div data-bind="component:{
+    <div data-bind="visible:visAlert">
+        <div data-bind="component:{
         name:'alert-component',
         }"></div>
-        </div>
+    </div>
         
    
 
    
 
+</div>
 </div><!--SluttPå loginClass-->
 
 
 
 
-<div class="LoggedIn" id="LoggedIn" data-bind="visible:showLoggedIn">
+<div class="LoggedIn" id="LoggedIn">
     
 
     <div class="page" id="elever">
         <h1></h1>
-        <span data-bind="text:Skolenavn"></span>
+       
         <div data-bind="component:{
         name:'elever-component',
         }">

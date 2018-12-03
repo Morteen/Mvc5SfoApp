@@ -10,7 +10,10 @@ console.log("Dette er log av skoleId fra VisElever.js filen:", LoginModel.idResu
 
 var ElevModel = {
     elever: ko.observable("hei hei fra elever"),
-    Skolenavn: ko.observable()
+    Skolenavn: ko.observable(),
+    elevlisteLaster: ko.observable(true),
+    elevlisteDiv: ko.observable(false),
+  
     
 
 
@@ -44,8 +47,17 @@ function VisEleverViewModel() {
 }
 function eleverTempl() {
 
-    return '<div>' +
-        '<h3 data-bind="text: ElevModel.Skolenavn:"></h3>' +
+    return '<div data-bind="visible:ElevModel.elevlisteLaster">Laster..</div>' +
+        '<div data-bind="visible:ElevModel.elevlisteDiv">' +
+        '<h3>Elver ved <span data-bind="text:ElevModel.Skolenavn"></span></h3>' +
+        '<table class="table table-condensed">' +
+        '<thead>' +
+        '<tr><td>Navn</td><td>Klasse</td><td></td></tr>'+
+        '</thead>' +
+        '<tbody>' +
+        '<tr><td>Test</td><td>Test</td><td>Test</td></tr>' +
+        '</tbody>'
+        '</table>'
         '</div>'
 }
 
@@ -67,7 +79,9 @@ function getSkole() {
         url: "http://localhost:2804/api/Skoler/"+ LoginModel.idResultSkoleId(),
        dataType: "json",
         success: function (result) {
-            ElevModel.Skolenavn(result.SkoleNavn)
+            ElevModel.Skolenavn(result.SkoleNavn);
+            ElevModel.elevlisteLaster(false);
+            ElevModel.elevlisteDiv(true);
            console.log("Skole resultater:", result.SkoleNavn)
 
         },
