@@ -50,6 +50,9 @@ $("#ElverLink").on("click", notify);
 function VisEleverViewModel() {
 
     this.self = this;
+    self.visElevData= function() {
+       console.log(this)
+    }
 }
 function eleverTempl() {
 
@@ -62,8 +65,9 @@ function eleverTempl() {
             '<tr><td>Navn</td><td>Klasse</td><td></td></tr>'+
             '</thead>' +
             '<tbody data-bind="foreach:ElevModel.elevListe">' +
-             '<tr><td data-bind="text:Fornavn"></td><td data-bind="text:Etternavn"></td><td>Trinn</td></tr>' +
-            '</tbody>'+
+             '<tr>' +
+        '<td> <span data-bind="text:Fornavn"></span><span data-bind="text:Etternavn"></span></td><td><span data-bind="text:Trinn"></span><span>" "</span>' +
+        '<span data-bind="text:Klasse"></span></td><td><button class="btn btn-link" data-bind="click:visElevData">Detaljer/oppmøte</button></td>' +
              '</table>'
         
 }
