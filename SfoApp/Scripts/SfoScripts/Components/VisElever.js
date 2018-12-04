@@ -11,9 +11,13 @@ console.log("Dette er log av skoleId fra VisElever.js filen:", LoginModel.idResu
 var ElevModel = {
     elever: ko.observable("hei hei fra elever"),
     Skolenavn: ko.observable(),
-    SkoleId:ko.observable(),
     elevlisteLaster: ko.observable(true),
-    elevlisteDiv: ko.observable(false),
+    ElevListeLaster:ko.observable(true),
+     elevlisteDiv: ko.observable(false),
+     elevHeadingLaster: ko.observable(true),
+     elevheading: ko.observable(false),
+  
+    elevListe:ko.observableArray()
   
     
 
@@ -49,18 +53,19 @@ function VisEleverViewModel() {
 }
 function eleverTempl() {
 
-    return '<div data-bind="visible:ElevModel.elevlisteLaster">Laster..</div>' +
-        '<div data-bind="visible:ElevModel.elevlisteDiv">' +
-        '<h3>Elver ved <span data-bind="text:ElevModel.Skolenavn"></span></h3>' +
-        '<table class="table table-condensed">' +
-        '<thead>' +
-        '<tr><td>Navn</td><td>Klasse</td><td></td></tr>'+
-        '</thead>' +
-        '<tbody>' +
-        '<tr><td>Test</td><td>Test</td><td>Test</td></tr>' +
-        '</tbody>'
-        '</table>'
-        '</div>'
+// data-bind="visible:ElevModel.elevlisteDiv"  data-bind="visible:ElevModel.elevHeadingLaster"
+    return '<h4 data-bind="visible:ElevModel.elevHeadingLaster" >Laster....</h4>' +
+              '<h3 data-bind="visible:ElevModel.elevheading">Elver ved <span data-bind="text:ElevModel.Skolenavn"></span></h3>' +
+             '<h4 data-bind="visible:ElevModel.elevListeLaster" >Laster....</h4>' +
+             '<table class="table table-condensed"data-bind="visible:ElevModel.elevlisteDiv">' +
+            '<thead>' +
+            '<tr><td>Navn</td><td>Klasse</td><td></td></tr>'+
+            '</thead>' +
+            '<tbody data-bind="foreach:ElevModel.elevListe">' +
+             '<tr><td data-bind="text:Fornavn"></td><td data-bind="text:Etternavn"></td><td>Trinn</td></tr>' +
+            '</tbody>'+
+             '</table>'
+        
 }
 
 ko.components.register('elever-component', {
@@ -68,7 +73,6 @@ ko.components.register('elever-component', {
     template: eleverTempl()
 })
 ko.applyBindings(ElevModel, $("#elever")[0]);
-
 
 //Henter navn på den aktuelle skolen
 function getSkole() {
@@ -82,9 +86,9 @@ function getSkole() {
        dataType: "json",
         success: function (result) {
             ElevModel.Skolenavn(result.SkoleNavn);
-            ElevModel.SkoleId(result.SkoleId);
-            ElevModel.elevlisteLaster(false);
-            ElevModel.elevlisteDiv(true);
+            ElevModel.elevHeadingLaster(false);
+            ElevModel.elevheading(true)
+            
            console.log("Skole resultater:", result.SkoleNavn)
 
         },
@@ -103,12 +107,15 @@ function getElever() {
 
     $.ajax({
         Type: "GET",
-        url: "/http://localhost:2804/api/Elever?skoleId=" + ElevModel.SkoleId(),
+        url: "http://localhost:2804/api/Elever?skoleId=" + LoginModel.idResultSkoleId(),
         dataType: "json",
         success: function (result) {
             
             console.log("Elev resultater:", result)
-
+            ElevModel.ElevListeLaster(false)
+            ElevModel.elevlisteDiv(true);
+            ElevModel.elevListe(result)
+            console.log(ElevModel.elevListe())
         },
         error: function (xhr, status, error) {
 
