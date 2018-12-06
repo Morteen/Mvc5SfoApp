@@ -12,10 +12,14 @@ var ElevModel = {
     elever: ko.observable("hei hei fra elever"),
     Skolenavn: ko.observable(),
     elevlisteLaster: ko.observable(true),
-    ElevListeLaster:ko.observable(true),
-     elevlisteDiv: ko.observable(false),
-     elevHeadingLaster: ko.observable(true),
-     elevheading: ko.observable(false),
+    ElevListeLaster: ko.observable(true),
+    elevlisteDiv: ko.observable(false),
+    elevHeadingLaster: ko.observable(true),
+    elevheading: ko.observable(false),
+    elevDetail: ko.observable(false),
+    elevDetailNavn: ko.observable(),
+    elevOpplysninger:ko.observable(),
+    
   
     elevListe:ko.observableArray()
   
@@ -50,8 +54,26 @@ $("#ElverLink").on("click", notify);
 function VisEleverViewModel() {
 
     this.self = this;
+    
+  
+    self.tilbake = function () {
+        ElevModel.elevDetail(false);
+        ElevModel.elevheading(true);
+        ElevModel.elevlisteDiv(true);
+        ElevModel.elevDetailNavn();
+        ElevModel.elevOpplysninger();
+
+    }
+
     self.visElevData= function() {
-       console.log(this)
+        console.log(this)
+        ElevModel.elevDetail(true);
+        ElevModel.elevheading(false);
+        ElevModel.elevlisteDiv(false);
+        ElevModel.elevDetailNavn(this.Fornavn);
+        ElevModel.elevOpplysninger("Dette er oppmøte opplysninger om " + this.Fornavn + " " + this.Etternavn + " i klasse: " + this.Trinn + "" + this.Klasse);
+
+     
     }
 }
 function eleverTempl() {
@@ -66,9 +88,14 @@ function eleverTempl() {
             '</thead>' +
             '<tbody data-bind="foreach:ElevModel.elevListe">' +
              '<tr>' +
-        '<td> <span data-bind="text:Fornavn"></span><span data-bind="text:Etternavn"></span></td><td><span data-bind="text:Trinn"></span><span>" "</span>' +
+        '<td> <span data-bind="text:Fornavn"></span><span data-bind="text:Etternavn"></span></td><td><span data-bind="text:Trinn"></span>' +
         '<span data-bind="text:Klasse"></span></td><td><button class="btn btn-link" data-bind="click:visElevData">Detaljer/oppmøte</button></td>' +
-             '</table>'
+             '</table>'+
+        '<div data-bind="visible:ElevModel.elevDetail">' +
+        '<span data-bind="text: ElevModel.elevOpplysninger"></span></br>' +
+        '<button class="btn btn-link" data-bind="click:tilbake">Tilbake</button>'
+        '</div>'
+
         
 }
 
