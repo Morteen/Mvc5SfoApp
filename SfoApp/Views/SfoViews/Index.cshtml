@@ -98,12 +98,18 @@
 
     <!---->
     <div class="page active" id="home">
-        <h1>Home</h1>
-        <ol>
-            <li><a href="#" data-target="home" class="nav-link">HOME</a></li>
-            <li><a href="#" data-target="list" class="nav-link">LIST</a></li>
-            <li><a href="#" data-target="detail" class="nav-link">DETAIL</a></li>
-        </ol>
+        <h1></h1>
+        <div data-bind="component:{
+        name:'RegAnsvarlig-component',
+        }">
+
+        </div>
+        <div data-bind="component:{
+        name:'Reg-component',
+        }">
+
+        </div>
+        
     </div>
 
     <div class="page" id="list">

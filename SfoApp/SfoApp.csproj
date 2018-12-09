@@ -286,6 +286,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\SfoScripts\Components\LoginView.js" />
+    <Content Include="Scripts\SfoScripts\Components\RegistrerOppmote.js" />
     <Content Include="Scripts\SfoScripts\Components\RegUser.js" />
     <Content Include="Scripts\SfoScripts\Components\templatePage.html" />
     <Content Include="Scripts\SfoScripts\Components\VisElever.js" />
