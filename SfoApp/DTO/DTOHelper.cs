@@ -116,6 +116,32 @@ namespace SfoApp.DTO
 
         #endregion
 
+        public static SjekkInnLoggDto mappOnSjekkInn(SjekkInLogg sjekkInn)
+        {
+            var dto= new SjekkInnLoggDto();
 
+            dto.SkoleId = sjekkInn.SkoleId;
+            dto.ElevId = sjekkInn.ElevId;
+            dto.Info = sjekkInn.Info;
+            dto.SjekkInn = sjekkInn.SjekkInn;
+            dto.SjekkUt = sjekkInn.SjekkUt;
+
+            return dto;
+        }
+
+        public static List<SjekkInnLoggDto> toSjekkinnDtoList(List<SjekkInLogg> logg)
+        {
+            var dto = new List<SjekkInnLoggDto>();
+
+            foreach (var sjekk in logg)
+            {
+                dto.Add(mappOnSjekkInn(sjekk));
+            }
+
+
+
+            return dto;
+
+        }
     }
 }

@@ -91,3 +91,5 @@ D:\Web-utvikling\Mvc5SfoApp\SfoApp\bin\System.Web.Http.WebHost.dll
 D:\Web-utvikling\Mvc5SfoApp\SfoApp\bin\System.Net.Http.Formatting.xml
 D:\Web-utvikling\Mvc5SfoApp\SfoApp\bin\System.Web.Http.xml
 D:\Web-utvikling\Mvc5SfoApp\SfoApp\bin\System.Web.Http.WebHost.xml
+D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.Migrations.populate_SjekkInnLogg.resources
+D:\Web-utvikling\Mvc5SfoApp\SfoApp\obj\Debug\SfoApp.Migrations.pop_sjekkIgjen.resources

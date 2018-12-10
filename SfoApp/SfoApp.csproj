@@ -213,6 +213,7 @@
     <Compile Include="Controllers\API\AnsattesController.cs" />
     <Compile Include="Controllers\API\EleverController.cs" />
     <Compile Include="Controllers\API\SFOsController.cs" />
+    <Compile Include="Controllers\API\SjekkLoggInnsController.cs" />
     <Compile Include="Controllers\API\SkolerController.cs" />
     <Compile Include="Controllers\ElevsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -241,6 +242,14 @@
     <Compile Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.cs" />
     <Compile Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.Designer.cs">
       <DependentUpon>201811131236321_added_username_and_password_to_Ansatt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812101836504_populate_SjekkInnLogg.cs" />
+    <Compile Include="Migrations\201812101836504_populate_SjekkInnLogg.Designer.cs">
+      <DependentUpon>201812101836504_populate_SjekkInnLogg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812101944160_pop_sjekkIgjen.cs" />
+    <Compile Include="Migrations\201812101944160_pop_sjekkIgjen.Designer.cs">
+      <DependentUpon>201812101944160_pop_sjekkIgjen.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -367,6 +376,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.resx">
       <DependentUpon>201811131236321_added_username_and_password_to_Ansatt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812101836504_populate_SjekkInnLogg.resx">
+      <DependentUpon>201812101836504_populate_SjekkInnLogg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812101944160_pop_sjekkIgjen.resx">
+      <DependentUpon>201812101944160_pop_sjekkIgjen.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

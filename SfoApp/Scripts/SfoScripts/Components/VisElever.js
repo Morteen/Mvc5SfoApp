@@ -17,11 +17,13 @@ var ElevModel = {
     elevHeadingLaster: ko.observable(true),
     elevheading: ko.observable(false),
     elevDetail: ko.observable(false),
+    oppmote: ko.observable(false),
     elevDetailNavn: ko.observable(),
     elevOpplysninger:ko.observable(),
     
   
-    elevListe:ko.observableArray()
+    elevListe: ko.observableArray(),
+    elevOppmote: ko.observableArray()
   
     
 
@@ -70,10 +72,11 @@ function VisEleverViewModel() {
         ElevModel.elevDetail(true);
         ElevModel.elevheading(false);
         ElevModel.elevlisteDiv(false);
+        ElevModel.oppmote(true);
         ElevModel.elevDetailNavn(this.Fornavn);
         ElevModel.elevOpplysninger("Dette er oppmøte opplysninger om " + this.Fornavn + " " + this.Etternavn + " i klasse: " + this.Trinn + "" + this.Klasse);
-
-     
+        //Henter oppmøte detaljerhttp://localhost:2804/api/SjekkLoggInns?skoleId=1&elevId=1
+        getOppmote(this.ElevId)
     }
 }
 function eleverTempl() {
@@ -93,6 +96,17 @@ function eleverTempl() {
              '</table>'+
         '<div data-bind="visible:ElevModel.elevDetail">' +
         '<span data-bind="text: ElevModel.elevOpplysninger"></span></br>' +
+        '<table class="table table-condensed" data-bind="visible:ElevModel.oppmote">' +
+        '<thead>' +
+        '<tr><td>Sjekk inn</td><td>Sjekk ut</td><td>Spesielle opplysninger</td></tr>' +
+        '</thead>' +
+        '<tbody data-bind="foreach:ElevModel.elevOppmote">' +
+        '<tr>' +
+        '<td data-bind="text:SjekkInn"></td>' +
+        '<td data-bind="text:SjekkUt"></td>' +
+        '<td data-bind="text:Info"></td>'+
+        '</tr>'+
+        '</table>'+
         '<button class="btn btn-link" data-bind="click:tilbake">Tilbake</button>'
         '</div>'
 
@@ -155,4 +169,27 @@ function getElever() {
 
         }
     })
+}
+
+
+function getOppmote(id) {
+    console.log("ElevId fra oppmøte",id)
+
+    $.ajax({
+        Type: "GET",
+        url: "http://localhost:2804/api/SjekkLoggInns?skoleId="+ LoginModel.idResultSkoleId()+ "&elevId="+id,
+        dataType: "json",
+        success: function (result) {
+            ElevModel.elevOppmote(result);
+            console.log("Elev oppmøte resultater:", result)
+           
+        },
+        error: function (xhr, status, error) {
+
+
+            console.log("Her gikk noe galt i å hente elevens oppmøte !", xhr, status)
+
+        }
+    })
+
 }
