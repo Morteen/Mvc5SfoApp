@@ -19,7 +19,10 @@ var ElevModel = {
     elevDetail: ko.observable(false),
     oppmote: ko.observable(false),
     elevDetailNavn: ko.observable(),
-    elevOpplysninger:ko.observable(),
+    elevOpplysninger: ko.observable(),
+
+   
+   
     
   
     elevListe: ko.observableArray(),
@@ -78,6 +81,20 @@ function VisEleverViewModel() {
         //Henter oppmøte detaljerhttp://localhost:2804/api/SjekkLoggInns?skoleId=1&elevId=1
         getOppmote(this.ElevId)
     }
+    self.Dato = function(index){
+        console.log("Log av this i test funksjonen:", this.ElevModel.elevOppmote()[index].SjekkInn)
+        var temp = this.ElevModel.elevOppmote()[1].SjekkInn.split("T",1)
+       var dato=temp.toString().slice(5-10)
+        return dato 
+    }
+    self.Inn = function (index) {
+        var temp = this.ElevModel.elevOppmote()[1].SjekkInn.split("T", 2)
+        var tid = temp.toString().slice(4-7)
+        return temp
+
+    }
+   
+
 }
 function eleverTempl() {
 
@@ -98,11 +115,12 @@ function eleverTempl() {
         '<span data-bind="text: ElevModel.elevOpplysninger"></span></br>' +
         '<table class="table table-condensed" data-bind="visible:ElevModel.oppmote">' +
         '<thead>' +
-        '<tr><td>Sjekk inn</td><td>Sjekk ut</td><td>Spesielle opplysninger</td></tr>' +
+        '<tr><td>Dato</td><td>Sjekk inn</td><td>Sjekk ut</td><td>Spesielle opplysninger</td></tr>' +
         '</thead>' +
         '<tbody data-bind="foreach:ElevModel.elevOppmote">' +
         '<tr>' +
-        '<td data-bind="text:SjekkInn"></td>' +
+        '<td data-bind="text:Dato($index())"></td>' +
+        '<td data-bind="text:Inn($index())"></td>' +
         '<td data-bind="text:SjekkUt"></td>' +
         '<td data-bind="text:Info"></td>'+
         '</tr>'+
@@ -180,7 +198,8 @@ function getOppmote(id) {
         url: "http://localhost:2804/api/SjekkLoggInns?skoleId="+ LoginModel.idResultSkoleId()+ "&elevId="+id,
         dataType: "json",
         success: function (result) {
-            ElevModel.elevOppmote(result);
+          
+            ElevModel.elevOppmote( result);
             console.log("Elev oppmøte resultater:", result)
            
         },
