@@ -7,6 +7,7 @@ var LoginModel = {
     visAlert: ko.observable(false),
     visVelkom: ko.observable(true),
     visLink: ko.observable(true),
+    elevListe:ko.observableArray(),
    
    
     velkomTxt: ko.observable("Velkommen Bruk linkene til høyre for å logge inn eller registrere deg"),
@@ -139,7 +140,8 @@ function LoginComponentViewModel() {
                         console.log(sessionStorage.AnsattNavn)
                     //prøver å lagre verdien i et hidden field
                         $("#hiddenSkoleId").val(result.SkoleId)
-                    LoginModel.idResultSkoleId(result.SkoleId)
+                        LoginModel.idResultSkoleId(result.SkoleId)
+                    getElever();
                 },
 
                 error: function (xhr, status, error) {
@@ -172,7 +174,26 @@ function LoginComponentViewModel() {
 
 
 
+function getElever() {
 
+
+    $.ajax({
+        Type: "GET",
+        url: "http://localhost:2804/api/Elever?skoleId=" + LoginModel.idResultSkoleId(),
+        dataType: "json",
+        success: function (result) {
+
+            console.log("Elev resultater:", result)
+           LoginModel.elevListe(result)
+        },
+        error: function (xhr, status, error) {
+
+
+            console.log("Her gikk noe galt i å hente elever!", xhr, status)
+
+        }
+    })
+}
 
 function velkomTempl() {
     return '<div class="jumbotron" id="VelkomJumbo">' +

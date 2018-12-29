@@ -21,10 +21,6 @@ var ElevModel = {
     elevDetailNavn: ko.observable(),
     elevOpplysninger: ko.observable(),
 
-   
-   
-    
-  
     elevListe: ko.observableArray(),
     elevOppmote: ko.observableArray()
   
@@ -43,7 +39,8 @@ function notify() {
     
     console.log("Dette er log av skoleId fra VisElever.js filen etter link:", LoginModel.idResultSkoleId())
     getSkole();
-    getElever();
+    getAlleElever();
+    console.log("log av elevliste etter link", ElevModel.elevListe())
 }
 $("#ElverLink").on("click", notify);
 
@@ -78,7 +75,6 @@ function VisEleverViewModel() {
         ElevModel.oppmote(true);
         ElevModel.elevDetailNavn(this.Fornavn);
         ElevModel.elevOpplysninger("Dette er oppmøte opplysninger om " + this.Fornavn + " " + this.Etternavn + " i klasse: " + this.Trinn + "" + this.Klasse);
-        //Henter oppmøte detaljerhttp://localhost:2804/api/SjekkLoggInns?skoleId=1&elevId=1
         getOppmote(this.ElevId)
     }
     self.Dato = function(index){
@@ -98,7 +94,6 @@ function VisEleverViewModel() {
 }
 function eleverTempl() {
 
-// data-bind="visible:ElevModel.elevlisteDiv"  data-bind="visible:ElevModel.elevHeadingLaster"
     return '<h4 data-bind="visible:ElevModel.elevHeadingLaster" >Laster....</h4>' +
               '<h3 data-bind="visible:ElevModel.elevheading">Elver ved <span data-bind="text:ElevModel.Skolenavn"></span></h3>' +
              '<h4 data-bind="visible:ElevModel.elevListeLaster" >Laster....</h4>' +
@@ -108,7 +103,7 @@ function eleverTempl() {
             '</thead>' +
             '<tbody data-bind="foreach:ElevModel.elevListe">' +
              '<tr>' +
-        '<td> <span data-bind="text:Fornavn"></span><span data-bind="text:Etternavn"></span></td><td><span data-bind="text:Trinn"></span>' +
+        '<td> <class="elevdisplay"span data-bind="text:Fornavn"></span><class="elevdisplay"span data-bind="text:Etternavn"></span></td><td><span data-bind="text:Trinn"></span>' +
         '<span data-bind="text:Klasse"></span></td><td><button class="btn btn-link" data-bind="click:visElevData">Detaljer/oppmøte</button></td>' +
              '</table>'+
         '<div data-bind="visible:ElevModel.elevDetail">' +
@@ -165,7 +160,7 @@ function getSkole() {
 
 }
 
-function getElever() {
+function getAlleElever() {
    
 
     $.ajax({
@@ -183,7 +178,7 @@ function getElever() {
         error: function (xhr, status, error) {
 
           
-            console.log("Her gikk noe galt i å hente elever!", xhr, status)
+            console.log("Her gikk noe galt i å hente elever i elevr siden!", xhr, status)
 
         }
     })
