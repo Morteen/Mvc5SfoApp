@@ -90,3 +90,15 @@ textarea {
     margin-right:7px;
     padding-right:3px;
 }
+.SjekketInnStyle{
+   background-color: lightgrey;
+
+    font-style:italic
+
+}
+.SjekketUtStyle{
+    text-decoration: line-through;
+    background-color: orange;
+        font-style:italic
+
+}

@@ -4,13 +4,18 @@
 var VisRegSide = {
     regAnsvarlig: ko.observable(sessionStorage.AnsattNavn),
     antallElever: ko.observable(),
-    elever: ko.observableArray(),
+    
     antallSjekketInn: ko.observable(0),
-    antallSjekketUt: ko.observable(0)
+    antallSjekketUt: ko.observable(0),
+    tempArray:[]
 
 
     
 }
+
+
+
+
 
 
 function getRegAnsvarlig() {
@@ -19,7 +24,9 @@ function getRegAnsvarlig() {
     console.log("Logg fra registrering siden", sessionStorage.AnsattNavn)
     VisRegSide.regAnsvarlig(sessionStorage.AnsattNavn);
     getElever();
-   VisRegSide.antallElever(VisRegSide.elever().length)
+    MapElever();
+    console.log("Elever i regOppmøte etter mapping:", elever())
+   VisRegSide.antallElever(elever().length)
 
 }
 $("#regLink").on("click", getRegAnsvarlig);
@@ -35,25 +42,56 @@ function VisRegAnsvarligViewModel() {
 
 function RegEleverViewModel() {
     this.self = this;
-    self.notSjekkedInn = ko.observable(true)
-
-    self.test = function () {
-       
-       
+    self.elever = ko.observableArray()
+    //
+    self.elev =function(_ElevId, _navn, _Klasse, _Trinn) {
+        this.ElevId = ko.observable(_ElevId)
+        this.Navn = ko.observable(_navn),
+        this.Klasse = ko.observable(_Klasse),
+        this.Trinn = ko.observable(_Trinn),
+        this.SjekketInn=ko.observable(false);
+        this.SjekketUt = ko.observable(false);
+        this.InnTime = ko.observable();
+        this.UtTime = ko.observable()
     }
+
+
+    //
+
+    self.MapElever=() =>{
+        for (var i = 0; i < VisRegSide.tempArray.length; i++) {
+           elever.push(new elev(VisRegSide.tempArray[i].ElevId, VisRegSide.tempArray[i].Fornavn + " " + VisRegSide.tempArray[i].Etternavn, VisRegSide.tempArray[i].Klasse, VisRegSide.tempArray[i].Trinn))
+        }
+    }
+
+  
+    
+    
+    
   
     self.sjekkInn = function () {
-        var button = $(this);
-        console.log("log fra sjekkInn function:", this.ElevId, LoginModel.idResultSkoleId(), getFormattedDate())
-        VisRegSide.antallSjekketInn(VisRegSide.antallSjekketInn() + 1)
-        var test = button.attr("data-customer-id")
-        console.log(test)
+
+
+
+        if (this.SjekketInn()) {
+            alert("Denne eleven er allerede sjekket inn")
+            
+        } else {
+            this.SjekketInn(true);
+            this.InnTime(getFormattedDate())
+            console.log("log fra sjekkInn function:", this.ElevId(), LoginModel.idResultSkoleId(), getFormattedDate(),this.SjekketInn())
+            VisRegSide.antallSjekketInn(VisRegSide.antallSjekketInn() + 1)
+        }
+        
+        
+      
+     
       
 
     }
      self.sjekkUt = function () {
-         console.log("log fra sjekkUt function:", this.ElevId, LoginModel.idResultSkoleId(), getFormattedDate())
-         self.notSjekkedInn = false
+         console.log("log fra sjekkUt function:", this.ElevId(), LoginModel.idResultSkoleId(), getFormattedDate())
+         this.SjekketUt(true)
          VisRegSide.antallSjekketUt(VisRegSide.antallSjekketUt() + 1)
      }
    
@@ -93,19 +131,20 @@ function RegElever() {
   
     return '<table id="elever"class="table table-condensed">' +
         '<thead>' +
-        '<tr><td>Navn</td><td>Klasse</td><td></td></tr>'+
+        '<tr><td>Navn</td><td>Klasse</td><td>Sjekket inn</td></tr>'+
         '</thead>' +
-        '<tbody data-bind="foreach:VisRegSide.elever">' +
-        '<tr>' +
+        '<tbody data-bind="foreach:elever">' +
+        '<tr data-bind="css:{SjekketInnStyle:SjekketInn()===true,SjekketUtStyle:SjekketUt()===true}">' +
         '<td>' +
-        '<span class="elevdisplay" data-bind="text:Fornavn"></span><span class="elevdisplay"data-bind="text:Etternavn"></span>' +
+        '<span class="elevdisplay" data-bind="text:Navn">' +
         '</td>' +
         '<td>' +
         '<span data-bind="text:Trinn"></span><span data-bind="text:Klasse"></span>' +
         '</td>' +
+        '<td data-bind="text:InnTime"></td>'+
         '<td>' +
-        '<button class="btn btn-link js-test" data-customer-id="1"data-bind="click:sjekkInn,click:$parent.test">Sjekk inn elev</button> ' +
-        '<button class="btn btn-link"data-bind="click:sjekkUt">Sjekk ut elev</button>' +
+        '<button class="btn btn-link"data-bind="click:sjekkInn,ifnot:SjekketInn()">Sjekk inn elev</button> ' +
+        '<button class="btn btn-link"data-bind="click:sjekkUt,visible:SjekketInn()">Sjekk ut elev</button>' +
         '</td>' +
        
         '</tr>' +
@@ -113,12 +152,7 @@ function RegElever() {
         
 }
 
-$("#elever").on("click", ".js-test", function () {
-   
-    var test=button.attr("data-customer-id")
-   console.log("Hei")
 
-})
 
 
 
@@ -160,8 +194,8 @@ function getElever() {
         dataType: "json",
         success: function (result) {
 
-            VisRegSide.elever(result)
-            console.log("Elever i regOppmøte:", VisRegSide.elever())
+            VisRegSide. tempArray=result
+            console.log("Elever i regOppmøte:", VisRegSide.tempArray)
         },
         error: function (xhr, status, error) {
 
