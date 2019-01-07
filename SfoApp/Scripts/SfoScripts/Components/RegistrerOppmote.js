@@ -4,7 +4,7 @@
 var VisRegSide = {
     regAnsvarlig: ko.observable(sessionStorage.AnsattNavn),
     antallElever: ko.observable(),
-    
+    dato:ko.observable(),
     antallSjekketInn: ko.observable(0),
     antallSjekketUt: ko.observable(0),
     tempArray:[]
@@ -23,8 +23,12 @@ function getRegAnsvarlig() {
 
     console.log("Logg fra registrering siden", sessionStorage.AnsattNavn)
     VisRegSide.regAnsvarlig(sessionStorage.AnsattNavn);
-    getElever();
-    MapElever();
+    VisRegSide.dato(getDato())
+    if (elever().length == 0) {
+        getElever();
+        MapElever();
+    }
+    
     console.log("Elever i regOppmøte etter mapping:", elever())
    VisRegSide.antallElever(elever().length)
 
@@ -78,8 +82,8 @@ function RegEleverViewModel() {
             
         } else {
             this.SjekketInn(true);
-            this.InnTime(getFormattedDate())
-            console.log("log fra sjekkInn function:", this.ElevId(), LoginModel.idResultSkoleId(), getFormattedDate(),this.SjekketInn())
+            this.InnTime(getTime())
+            console.log("log fra sjekkInn function:", this.ElevId(), LoginModel.idResultSkoleId(), getTime(), getDato(), sessionStorage.getItem("AnsattId"))
             VisRegSide.antallSjekketInn(VisRegSide.antallSjekketInn() + 1)
         }
         
@@ -90,8 +94,9 @@ function RegEleverViewModel() {
 
     }
      self.sjekkUt = function () {
-         console.log("log fra sjekkUt function:", this.ElevId(), LoginModel.idResultSkoleId(), getFormattedDate())
+         console.log("log fra sjekkUt function:", this.ElevId(), LoginModel.idResultSkoleId(), getTime())
          this.SjekketUt(true)
+         this.UtTime(getTime())
          VisRegSide.antallSjekketUt(VisRegSide.antallSjekketUt() + 1)
      }
    
@@ -108,6 +113,8 @@ function RegAnsvarlig() {
         '<div class="container">' +
         '<div class="navbar-header">' +
         '<ul class="nav navbar-nav" style="margin-top:15px">' +
+        '<li class="elevdisplay">Dato: </li>' +
+        '<li class="elevdisplay"data-bind="text:VisRegSide.dato"> </li>' +
         '<li class="elevdisplay">Ansvarlig for registrering: </li>' +
         '<li class="elevdisplay" data-bind="text:VisRegSide.regAnsvarlig"></li>' +
        '</ul>' +
@@ -141,7 +148,8 @@ function RegElever() {
         '<td>' +
         '<span data-bind="text:Trinn"></span><span data-bind="text:Klasse"></span>' +
         '</td>' +
-        '<td data-bind="text:InnTime"></td>'+
+        '<td data-bind="text:InnTime"></td>' +
+        '<td data-bind="text:UtTime"></td>' +
         '<td>' +
         '<button class="btn btn-link"data-bind="click:sjekkInn,ifnot:SjekketInn()">Sjekk inn elev</button> ' +
         '<button class="btn btn-link"data-bind="click:sjekkUt,visible:SjekketInn()">Sjekk ut elev</button>' +
@@ -183,6 +191,18 @@ function getFormattedDate(){
 
     return d;
 }
+function getTime() {
+    var date= new Date()
+    var time= date.getHours()+":"+date.getMinutes()
+    return time
+}
+
+function getDato() {
+    var date = new Date()
+    var time = date.getDate() +  (":"+(date.getMonth() + 1)).slice(-2)
+    return time
+}
+
 
 
 function getElever() {

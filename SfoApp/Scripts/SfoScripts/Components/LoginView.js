@@ -135,7 +135,8 @@ function LoginComponentViewModel() {
                     //LoginModel.velkomTxt("Du er logget inn")
                         LoginModel.visLink(false)
                         
-                        sessionStorage.setItem("AnsattNavn", result.Fornavn+" "+result.Etternavn);
+                        sessionStorage.setItem("AnsattNavn", result.Fornavn + " " + result.Etternavn);
+                        sessionStorage.setItem("AnsattId", result.AnsattId);
                         sessionStorage.SkoleId = result.SkoleId;
                         console.log(sessionStorage.AnsattNavn)
                     //prøver å lagre verdien i et hidden field
