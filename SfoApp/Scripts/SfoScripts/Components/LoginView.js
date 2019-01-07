@@ -28,13 +28,18 @@ var LoginModel = {
 }
 
 $(document).ready(function () {
-
+    if (sessionStorage.length!=0) {
+        console.log("SessionStorage log ved refresh:", sessionStorage)
+        redirectOnRefresh()
+    }else{ 
 
     $.getJSON("http://localhost:2804/api/Skoler", function (data) {
         console.log("ready!");
         LoginModel.skoler(data)
         console.log("Logg av skoler", LoginModel.skoler());
     })
+    }
+
 
 });//Slutt på Jquery
 
@@ -137,7 +142,7 @@ function LoginComponentViewModel() {
                         
                         sessionStorage.setItem("AnsattNavn", result.Fornavn + " " + result.Etternavn);
                         sessionStorage.setItem("AnsattId", result.AnsattId);
-                        sessionStorage.SkoleId = result.SkoleId;
+                        sessionStorage.setItem("SkoleId",result.SkoleId);
                         console.log(sessionStorage.AnsattNavn)
                     //prøver å lagre verdien i et hidden field
                         $("#hiddenSkoleId").val(result.SkoleId)
@@ -269,3 +274,26 @@ ko.components.register('alert-component', {
 ko.applyBindings(LoginModel,$("#loginClass")[0]);
 
 
+///Hjelpefunksjoner
+function redirectOnRefresh() {
+
+    LoginModel.loginComponenter(false)
+    LoginModel.visVelkom(false)
+
+    $("#LoggedIn").show()
+    $("#loginLinker").hide()
+    $("#logOutLinker").show()
+    $("#sfoLinker").show()
+
+    //LoginModel.velkomTxt("Du er logget inn")
+    LoginModel.visLink(false)
+
+    console.log(sessionStorage.SkoleId)
+
+    //prøver å lagre verdien i et hidden field
+    $("#hiddenSkoleId").val(sessionStorage.SkoleId )
+    LoginModel.idResultSkoleId(sessionStorage.SkoleId)
+    getElever();
+
+
+}
