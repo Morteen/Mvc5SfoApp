@@ -120,11 +120,23 @@ namespace SfoApp.DTO
         {
             var dto= new SjekkInnLoggDto();
 
+            DateTime date = Convert.ToDateTime(sjekkInn.SjekkInn);
             dto.SkoleId = sjekkInn.SkoleId;
             dto.ElevId = sjekkInn.ElevId;
+            dto.AnsattId = sjekkInn.AnsattId;
             dto.Info = sjekkInn.Info;
-            dto.SjekkInn = sjekkInn.SjekkInn;
-            dto.SjekkUt = sjekkInn.SjekkUt;
+            if (10 > Int32.Parse(date.Minute.ToString()))
+            {
+                dto.SjekkInn = date.Hour.ToString() + ":0" + date.Minute.ToString();
+
+            }
+            else { dto.SjekkInn = date.Hour.ToString() + ":" + date.Minute.ToString(); }
+           
+            dto.SjekkUt = "11";
+            dto.Aar = date.Year.ToString();
+            dto.Dato = date.Day.ToString()+":"+date.Month.ToString();
+            dto.AnsattNavn = sjekkInn.Ansatt.Fornavn + " " + sjekkInn.Ansatt.Etternavn;
+
 
             return dto;
         }
@@ -142,6 +154,21 @@ namespace SfoApp.DTO
 
             return dto;
 
+        }
+
+        //fra dto til vanlig
+        public static SjekkInLogg mapInnsjekkDto(SjekkInnLoggDto dto)
+        {    var sjekkInn= new SjekkInLogg();
+            sjekkInn.SkoleId = dto.SkoleId;
+            sjekkInn.ElevId = dto.ElevId;
+            sjekkInn.AnsattId = dto.AnsattId;
+            sjekkInn.Info = dto.Info;
+            sjekkInn.SjekkInn = dto.SjekkInn;
+           
+            
+
+
+            return sjekkInn;
         }
     }
 }

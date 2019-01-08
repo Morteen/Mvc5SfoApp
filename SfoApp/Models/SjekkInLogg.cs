@@ -12,14 +12,17 @@ namespace SfoApp.Models
         public int Id { get; set; }
 
         [Display(Name = "Sjekk inn tidspunkt")]
-        public DateTime SjekkInn { get; set; }
+        public string SjekkInn { get; set; }
         [Display(Name = "Sjekk ut tidspunkt")]
-        public DateTime SjekkUt { get; set; }
-
+        public string SjekkUt { get; set; }
+        
         public string Info { get; set; }
 
         public int ElevId { get; set; }
         public virtual Elev Elev { get; set; }
+
+        public int AnsattId { get; set; }
+        public virtual Ansatt Ansatt { get; set; }
 
         public int SkoleId { get; set; }
         public virtual Skole Skole { get; set; }

@@ -227,29 +227,45 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811112041339_initial_migration.cs" />
-    <Compile Include="Migrations\201811112041339_initial_migration.Designer.cs">
-      <DependentUpon>201811112041339_initial_migration.cs</DependentUpon>
+    <Compile Include="Migrations\201901071650399_initial_migration.cs" />
+    <Compile Include="Migrations\201901071650399_initial_migration.Designer.cs">
+      <DependentUpon>201901071650399_initial_migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811112146188_addSkole.cs" />
-    <Compile Include="Migrations\201811112146188_addSkole.Designer.cs">
-      <DependentUpon>201811112146188_addSkole.cs</DependentUpon>
+    <Compile Include="Migrations\201901071654572_pop_skoler.cs" />
+    <Compile Include="Migrations\201901071654572_pop_skoler.Designer.cs">
+      <DependentUpon>201901071654572_pop_skoler.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811122017315_populate_Ansatt_and_Elev.cs" />
-    <Compile Include="Migrations\201811122017315_populate_Ansatt_and_Elev.Designer.cs">
-      <DependentUpon>201811122017315_populate_Ansatt_and_Elev.cs</DependentUpon>
+    <Compile Include="Migrations\201901071722216_pop_ansatte.cs" />
+    <Compile Include="Migrations\201901071722216_pop_ansatte.Designer.cs">
+      <DependentUpon>201901071722216_pop_ansatte.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.cs" />
-    <Compile Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.Designer.cs">
-      <DependentUpon>201811131236321_added_username_and_password_to_Ansatt.cs</DependentUpon>
+    <Compile Include="Migrations\201901071732515_pop_elever.cs" />
+    <Compile Include="Migrations\201901071732515_pop_elever.Designer.cs">
+      <DependentUpon>201901071732515_pop_elever.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812101836504_populate_SjekkInnLogg.cs" />
-    <Compile Include="Migrations\201812101836504_populate_SjekkInnLogg.Designer.cs">
-      <DependentUpon>201812101836504_populate_SjekkInnLogg.cs</DependentUpon>
+    <Compile Include="Migrations\201901071748545_pop_moreElever.cs" />
+    <Compile Include="Migrations\201901071748545_pop_moreElever.Designer.cs">
+      <DependentUpon>201901071748545_pop_moreElever.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812101944160_pop_sjekkIgjen.cs" />
-    <Compile Include="Migrations\201812101944160_pop_sjekkIgjen.Designer.cs">
-      <DependentUpon>201812101944160_pop_sjekkIgjen.cs</DependentUpon>
+    <Compile Include="Migrations\201901071916200_pop_sjekkInnLog.cs" />
+    <Compile Include="Migrations\201901071916200_pop_sjekkInnLog.Designer.cs">
+      <DependentUpon>201901071916200_pop_sjekkInnLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901081353522_pop_SjekkInnTryTwo.cs" />
+    <Compile Include="Migrations\201901081353522_pop_SjekkInnTryTwo.Designer.cs">
+      <DependentUpon>201901081353522_pop_SjekkInnTryTwo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901081849363_deleted_Colums_In_SjekkInnLog.cs" />
+    <Compile Include="Migrations\201901081849363_deleted_Colums_In_SjekkInnLog.Designer.cs">
+      <DependentUpon>201901081849363_deleted_Colums_In_SjekkInnLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901081859096_deleted_Colums_In_SjekkInnLogVol2.cs" />
+    <Compile Include="Migrations\201901081859096_deleted_Colums_In_SjekkInnLogVol2.Designer.cs">
+      <DependentUpon>201901081859096_deleted_Colums_In_SjekkInnLogVol2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901081904095_deleted_Colums_In_SjekkInnLogVol3.cs" />
+    <Compile Include="Migrations\201901081904095_deleted_Colums_In_SjekkInnLogVol3.Designer.cs">
+      <DependentUpon>201901081904095_deleted_Colums_In_SjekkInnLogVol3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -365,23 +381,35 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811112041339_initial_migration.resx">
-      <DependentUpon>201811112041339_initial_migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901071650399_initial_migration.resx">
+      <DependentUpon>201901071650399_initial_migration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811112146188_addSkole.resx">
-      <DependentUpon>201811112146188_addSkole.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901071654572_pop_skoler.resx">
+      <DependentUpon>201901071654572_pop_skoler.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811122017315_populate_Ansatt_and_Elev.resx">
-      <DependentUpon>201811122017315_populate_Ansatt_and_Elev.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901071722216_pop_ansatte.resx">
+      <DependentUpon>201901071722216_pop_ansatte.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811131236321_added_username_and_password_to_Ansatt.resx">
-      <DependentUpon>201811131236321_added_username_and_password_to_Ansatt.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901071732515_pop_elever.resx">
+      <DependentUpon>201901071732515_pop_elever.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812101836504_populate_SjekkInnLogg.resx">
-      <DependentUpon>201812101836504_populate_SjekkInnLogg.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901071748545_pop_moreElever.resx">
+      <DependentUpon>201901071748545_pop_moreElever.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812101944160_pop_sjekkIgjen.resx">
-      <DependentUpon>201812101944160_pop_sjekkIgjen.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901071916200_pop_sjekkInnLog.resx">
+      <DependentUpon>201901071916200_pop_sjekkInnLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901081353522_pop_SjekkInnTryTwo.resx">
+      <DependentUpon>201901081353522_pop_SjekkInnTryTwo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901081849363_deleted_Colums_In_SjekkInnLog.resx">
+      <DependentUpon>201901081849363_deleted_Colums_In_SjekkInnLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901081859096_deleted_Colums_In_SjekkInnLogVol2.resx">
+      <DependentUpon>201901081859096_deleted_Colums_In_SjekkInnLogVol2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901081904095_deleted_Colums_In_SjekkInnLogVol3.resx">
+      <DependentUpon>201901081904095_deleted_Colums_In_SjekkInnLogVol3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

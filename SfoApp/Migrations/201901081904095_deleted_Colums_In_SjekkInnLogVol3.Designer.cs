@@ -7,13 +7,13 @@ namespace SfoApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class pop_sjekkIgjen : IMigrationMetadata
+    public sealed partial class deleted_Colums_In_SjekkInnLogVol3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(pop_sjekkIgjen));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(deleted_Colums_In_SjekkInnLogVol3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812101944160_pop_sjekkIgjen"; }
+            get { return "201901081904095_deleted_Colums_In_SjekkInnLogVol3"; }
         }
         
         string IMigrationMetadata.Source

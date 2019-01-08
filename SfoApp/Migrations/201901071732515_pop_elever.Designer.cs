@@ -7,13 +7,13 @@ namespace SfoApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class populate_SjekkInnLogg : IMigrationMetadata
+    public sealed partial class pop_elever : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(populate_SjekkInnLogg));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(pop_elever));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812101836504_populate_SjekkInnLogg"; }
+            get { return "201901071732515_pop_elever"; }
         }
         
         string IMigrationMetadata.Source

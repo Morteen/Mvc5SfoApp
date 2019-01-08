@@ -7,13 +7,13 @@ namespace SfoApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addSkole : IMigrationMetadata
+    public sealed partial class pop_ansatte : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addSkole));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(pop_ansatte));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811112146188_addSkole"; }
+            get { return "201901071722216_pop_ansatte"; }
         }
         
         string IMigrationMetadata.Source

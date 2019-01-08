@@ -14,10 +14,12 @@ namespace SfoApp.Migrations
                         AnsattId = c.Int(nullable: false, identity: true),
                         Fornavn = c.String(nullable: false),
                         Etternavn = c.String(nullable: false),
+                        Username = c.String(),
+                        Password = c.String(maxLength: 18),
                         SkoleId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.AnsattId)
-                .ForeignKey("dbo.Skoles", t => t.SkoleId, cascadeDelete: true)
+                .ForeignKey("dbo.Skoles", t => t.SkoleId, cascadeDelete: false)
                 .Index(t => t.SkoleId);
             
             CreateTable(
@@ -75,14 +77,19 @@ namespace SfoApp.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         SjekkInn = c.DateTime(nullable: false),
                         SjekkUt = c.DateTime(nullable: false),
+                        Aar = c.DateTime(nullable: false),
+                        Dato = c.DateTime(nullable: false),
                         Info = c.String(),
                         ElevId = c.Int(nullable: false),
+                        AnsattId = c.Int(nullable: false),
                         SkoleId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Elevs", t => t.ElevId, cascadeDelete:false )
+                .ForeignKey("dbo.Ansatts", t => t.AnsattId, cascadeDelete: false)
+                .ForeignKey("dbo.Elevs", t => t.ElevId, cascadeDelete: false)
                 .ForeignKey("dbo.Skoles", t => t.SkoleId, cascadeDelete: false)
                 .Index(t => t.ElevId)
+                .Index(t => t.AnsattId)
                 .Index(t => t.SkoleId);
             
             CreateTable(
@@ -139,6 +146,7 @@ namespace SfoApp.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SjekkInLoggs", "SkoleId", "dbo.Skoles");
             DropForeignKey("dbo.SjekkInLoggs", "ElevId", "dbo.Elevs");
+            DropForeignKey("dbo.SjekkInLoggs", "AnsattId", "dbo.Ansatts");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Elevs", "SkoleId", "dbo.Skoles");
             DropForeignKey("dbo.Ansatts", "SkoleId", "dbo.Skoles");
@@ -146,6 +154,7 @@ namespace SfoApp.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.SjekkInLoggs", new[] { "SkoleId" });
+            DropIndex("dbo.SjekkInLoggs", new[] { "AnsattId" });
             DropIndex("dbo.SjekkInLoggs", new[] { "ElevId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });

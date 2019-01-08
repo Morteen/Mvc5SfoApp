@@ -13,7 +13,7 @@ namespace SfoApp.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201811112041339_initial_migration"; }
+            get { return "201901071650399_initial_migration"; }
         }
         
         string IMigrationMetadata.Source

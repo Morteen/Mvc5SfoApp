@@ -85,6 +85,7 @@ function RegEleverViewModel() {
             this.InnTime(getTime())
             console.log("log fra sjekkInn function:", this.ElevId(), LoginModel.idResultSkoleId(), getTime(), getDato(), sessionStorage.getItem("AnsattId"))
             VisRegSide.antallSjekketInn(VisRegSide.antallSjekketInn() + 1)
+            sjekkInnElev(LoginModel.idResultSkoleId(), this.ElevId(), sessionStorage.getItem("AnsattId"), "Denne er sjekket inn fra websiden")
         }
         
         
@@ -224,4 +225,32 @@ function getElever() {
 
         }
     })
+}
+
+function sjekkInnElev(skoleId,elevId,ansattId,info) {
+    $.ajax({
+                 Type: "POST",
+                 url:"/SfoViews/postOppmote",
+                 data: {
+                     skoleId:skoleId,
+                     elevId: elevId,
+                     AnsattId: ansattId,
+                     info:info
+                 },
+                 dataType: "json",
+                 success: function (result) {
+                     console.log(result)
+                     
+                 },
+ 
+                 error: function (xhr, status, error) {
+ 
+                     
+ 
+                     console.log("Her er noe galt!", xhr, status)
+                     
+                  
+                 }
+             })
+
 }

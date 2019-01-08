@@ -73,7 +73,41 @@ namespace SfoApp.Controllers
 
 
         }
+
         
+        public ActionResult postOppmote(int skoleId, int elevId, int AnsattId, string info)
+            
+        {
+            var date = DateTime.Now;
+            var dto = new SjekkInnLoggDto();
+            dto.SkoleId = skoleId;
+            dto.AnsattId = AnsattId;
+            dto.ElevId = elevId;
+            dto.Info = info;
+            dto.SjekkInn = date.ToString();
+
+
+
+            var sjekkInn = new SjekkInLogg();
+
+
+
+            if (ModelState.IsValid)
+            {
+                sjekkInn = DTOHelper.mapInnsjekkDto(dto);
+                _context.SjekkInLogg.Add(sjekkInn);
+                _context.SaveChanges();
+                return Json(elevId, JsonRequestBehavior.AllowGet);
+
+
+            }
+            else
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
 
 
     }
