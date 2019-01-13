@@ -57,7 +57,7 @@ namespace SfoApp.Controllers.API
                 sjekkInn = DTOHelper.mapInnsjekkDto(dto);
                 _context.SjekkInLogg.Add(sjekkInn);
                 _context.SaveChanges();
-                return "success";
+                return dto.SjekkInn;
             }
 
             return "feil";

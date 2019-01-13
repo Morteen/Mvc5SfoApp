@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using SfoApp.DTO;
 using SfoApp.ViewModels;
+using System.Data.Entity;
 
 namespace SfoApp.Controllers
 {
@@ -97,7 +98,7 @@ namespace SfoApp.Controllers
                 sjekkInn = DTOHelper.mapInnsjekkDto(dto);
                 _context.SjekkInLogg.Add(sjekkInn);
                 _context.SaveChanges();
-                return Json(elevId, JsonRequestBehavior.AllowGet);
+                return Json(dto.SjekkInn, JsonRequestBehavior.AllowGet);
 
 
             }
@@ -107,6 +108,40 @@ namespace SfoApp.Controllers
             }
 
         }
+
+
+
+        
+        public ActionResult postSjekkUt(int skoleId, int elevId,string sjekkInnTime,string sjekkUtTime)
+        {
+            var sjekkInn= new SjekkInLogg();
+            if (ModelState.IsValid)
+            {
+              sjekkInn  = _context.SjekkInLogg.Where(s=>s.SkoleId==skoleId&&s.ElevId==elevId&&s.SjekkInn.Equals(sjekkInnTime)).SingleOrDefault();
+
+                if (sjekkInn == null)
+                {
+                    return Json("SjekkInn er null, finner ikke riktig i basen: "+sjekkInnTime+" "+sjekkUtTime, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    sjekkInn.SjekkUt = sjekkUtTime;
+                    _context.Entry(sjekkInn).State = EntityState.Modified;
+                    _context.SaveChanges();
+                    return Json("SjekkUt er Ok", JsonRequestBehavior.AllowGet);
+                }
+               
+            }
+            else
+            {
+                return Json("Modelstate er ikke valid", JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+
+
+        
 
 
 

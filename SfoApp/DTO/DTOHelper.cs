@@ -121,6 +121,20 @@ namespace SfoApp.DTO
             var dto= new SjekkInnLoggDto();
 
             DateTime date = Convert.ToDateTime(sjekkInn.SjekkInn);
+            if (sjekkInn.SjekkUt != null)
+            {
+                DateTime dateUt = Convert.ToDateTime(sjekkInn.SjekkUt);
+
+                if (10 > Int32.Parse(date.Minute.ToString()))
+                {
+                    dto.SjekkUt = dateUt.Hour.ToString() + ":0" + dateUt.Minute.ToString();
+
+                }
+                else { dto.SjekkUt = dateUt.Hour.ToString() + ":" + dateUt.Minute.ToString(); }
+
+
+            }
+         
             dto.SkoleId = sjekkInn.SkoleId;
             dto.ElevId = sjekkInn.ElevId;
             dto.AnsattId = sjekkInn.AnsattId;
@@ -131,8 +145,8 @@ namespace SfoApp.DTO
 
             }
             else { dto.SjekkInn = date.Hour.ToString() + ":" + date.Minute.ToString(); }
-           
-            dto.SjekkUt = "11";
+
+            
             dto.Aar = date.Year.ToString();
             dto.Dato = date.Day.ToString()+":"+date.Month.ToString();
             dto.AnsattNavn = sjekkInn.Ansatt.Fornavn + " " + sjekkInn.Ansatt.Etternavn;
